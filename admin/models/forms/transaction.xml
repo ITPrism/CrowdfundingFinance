@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fieldset name="update" addfieldpath="/administrator/components/com_crowdfundingfinance/models/fields">
+
+        <field name="investor_id" type="user"
+               label="COM_CROWDFUNDINGFINANCE_SENDER"
+               description="COM_CROWDFUNDINGFINANCE_SENDER_DESC"
+               filter="int"
+                />
+
+        <field name="txn_amount" type="text"
+               label="COM_CROWDFUNDINGFINANCE_AMOUNT"
+               required="true"
+                />
+
+        <field name="txn_currency" type="text"
+               label="COM_CROWDFUNDINGFINANCE_CURRENCY"
+               filter="trim"
+               required="true"
+                />
+
+        <field name="service_provider" type="text"
+               label="COM_CROWDFUNDINGFINANCE_PAYMENT_GETAWAY"
+               filter="trim"
+               required="true"
+                />
+
+        <field name="txn_status" type="list"
+               label="COM_CROWDFUNDINGFINANCE_PAYMENT_STATUS"
+               filter="trim"
+               required="true"
+                >
+            <option value="pending">COM_CROWDFUNDINGFINANCE_PENDING</option>
+            <option value="completed">COM_CROWDFUNDINGFINANCE_COMPLETED</option>
+            <option value="canceled">COM_CROWDFUNDINGFINANCE_CANCELED</option>
+            <option value="refunded">COM_CROWDFUNDINGFINANCE_REFUNDED</option>
+        </field>
+
+        <field name="txn_id" type="text"
+               label="COM_CROWDFUNDINGFINANCE_TXN_ID"
+               filter="trim"
+               required="true"
+                />
+
+        <field name="parent_txn_id" type="text"
+               label="COM_CROWDFUNDINGFINANCE_PARENT_TXN_ID"
+               filter="trim"
+                />
+
+        <field name="id" type="text" class="readonly"
+               label="JGLOBAL_FIELD_ID_LABEL"
+               description="JGLOBAL_FIELD_ID_DESC"
+               default="0"
+               readonly="true"
+                />
+
+    </fieldset>
+</form>

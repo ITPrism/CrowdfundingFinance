@@ -1,0 +1,97 @@
+@CHARSET "UTF-8";
+
+/** Dashboard **/
+
+.help-box {
+	font-size: xx-small;
+	display: block;
+}
+
+.dashboard-stats .span4, .dashboard-stats .span8{
+    border: thin solid #dcdcdc;
+    margin-bottom: 10px;
+}
+
+h3.latest{
+	background: #e7e7e7 url(../../images/icon_list.png) no-repeat left;
+	margin:0;
+	padding: 5px 0 5px 20px;
+}
+
+h3.basic-stats {
+	background: #ffe4c4 url(../../images/icon_stats.png) no-repeat left;
+	margin:0;
+	padding: 5px 0 5px 20px;
+}
+
+.cf-response-type {
+	font: bold medium;
+	background-color: #ffefd5;
+}
+
+/* Project */
+.bar {
+    fill: steelblue;
+}
+
+.bar:hover {
+    fill: brown;
+}
+
+.axis {
+    font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.x.axis path {
+    display: none;
+}
+
+.arc path {
+  stroke: #fff;
+}
+
+
+.cf-goal {
+	color: #7b68ee;
+}
+
+.cf-funded {
+	font-weight: bold;
+	color: #228b22;
+}
+
+.cf-percent {
+	color: #8b4513;
+}
+
+p.cf-sticky {
+    padding:20px 20px 10px 40px;
+    margin:10px 0;
+}
+
+p.cf-sticky {
+    border-right:1px solid #e7e7e7;
+    border-top:1px solid #e7e7e7;
+    border-left:5px solid #e7e7e7;
+    border-bottom:1px solid #e7e7e7;
+    background:#F6F6F6 url(../images/sticky.gif) no-repeat left center;
+}
+
+.cf-sticky {
+    -webkit-border-radius:4px;
+    -khtml-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px
+}
+
+.cf-table-header {
+	background: #e7e7e7;
+	font-size: 16px;
+}

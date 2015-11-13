@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <fieldset name="basic" label="COM_CROWDFUNDINGFINANCE_BASIC">
+        <field name="d3_cdn" type="radio" default="1" label="COM_CROWDFUNDINGFINANCE_D3_CDN" description="COM_CROWDFUNDINGFINANCE_D3_CDN_DESC" class="btn-group">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+    </fieldset>
+
+    <fieldset name="fees" label="COM_CROWDFUNDINGFINANCE_FEES" addfieldpath="/administrator/components/com_crowdfunding/models/fields">
+        <field name="fees_fixed_campaign_percent" type="cfpercent" default="0" label="COM_CROWDFUNDINGFINANCE_FIXED_CAMPAIGN_PERCENT" description="COM_CROWDFUNDINGFINANCE_FIXED_CAMPAIGN_PERCENT_DESC" class="input-mini" css_layout="Bootstrap 2" />
+        <field name="fees_fixed_campaign_amount" type="cfamount" default="0" label="COM_CROWDFUNDINGFINANCE_FIXED_CAMPAIGN_AMOUNT" description="COM_CROWDFUNDINGFINANCE_FIXED_CAMPAIGN_AMOUNT_DESC" class="input-mini" css_layout="Bootstrap 2" />
+        <field name="fees_flexible_campaign_percent" type="cfpercent" default="0" label="COM_CROWDFUNDINGFINANCE_FLEXIBLE_CAMPAIGN_PERCENT" description="COM_CROWDFUNDINGFINANCE_FLEXIBLE_CAMPAIGN_PERCENT_DESC" class="input-mini" css_layout="Bootstrap 2" />
+        <field name="fees_flexible_campaign_amount" type="cfamount" default="0" label="COM_CROWDFUNDINGFINANCE_FLEXIBLE_CAMPAIGN_AMOUNT" description="COM_CROWDFUNDINGFINANCE_FLEXIBLE_CAMPAIGN_AMOUNT_DESC" class="input-mini" css_layout="Bootstrap 2" />
+    </fieldset>
+
+    <fieldset name="fraud_protection" label="COM_CROWDFUNDINGFINANCE_FRAUD_PREVENTION" description="COM_CROWDFUNDINGFINANCE_FRAUD_PREVENTION_PARAMS" addfieldpath="/administrator/components/com_crowdfunding/models/fields">
+        <field name="protection_max_contributed_amount" type="cfamount" label="COM_CROWDFUNDINGFINANCE_MAX_CONTRIBUTED_AMOUNT" description="COM_CROWDFUNDINGFINANCE_FLEXIBLE_CAMPAIGN_AMOUNT_DESC" class="input-mini" css_layout="Bootstrap 2" />
+        <field name="protection_payments_per_project" type="text" label="COM_CROWDFUNDINGFINANCE_PAYMENTS_PER_PROJECT" description="COM_CROWDFUNDINGFINANCE_PAYMENTS_PER_PROJECT_DESC" class="input-mini" />
+        <field name="protection_active_projects" type="text" label="COM_CROWDFUNDINGFINANCE_ACTIVE_PROJECTS" description="COM_CROWDFUNDINGFINANCE_ACTIVE_PROJECTS_DESC" class="input-mini" />
+        <field name="protection_projects_per_year" type="text" label="COM_CROWDFUNDINGFINANCE_PROJECTS_PER_YEAR" description="COM_CROWDFUNDINGFINANCE_PROJECTS_PER_YEAR_DESC" class="input-mini" />
+    </fieldset>
+
+    <fieldset name="stripeconnect" label="COM_CROWDFUNDINGFINANCE_STRIPECONNECT" description="COM_CROWDFUNDINGFINANCE_STRIPECONNECT_PARAMS" addfieldpath="/administrator/components/com_crowdfunding/models/fields">
+        <field name="stripe_client_id" type="text" label="COM_CROWDFUNDINGFINANCE_STRIPECONNECT_CLIENT_ID" description="COM_CROWDFUNDINGFINANCE_STRIPECONNECT_CLIENT_ID_DESC" class="input-xxlarge" />
+        <field name="stripe_secret_key" type="text" label="COM_CROWDFUNDINGFINANCE_STRIPECONNECT_SECRET_KEY" description="COM_CROWDFUNDINGFINANCE_STRIPECONNECT_SECRET_KEY_DESC" class="input-xxlarge" />
+        <field name="stripe_published_key" type="text" label="COM_CROWDFUNDINGFINANCE_STRIPECONNECT_PUBLISHABLE_KEY" description="COM_CROWDFUNDINGFINANCE_STRIPECONNECT_PUBLISHABLE_KEY_DESC" class="input-xxlarge" />
+
+        <field name="stripe_sandbox_enabled" type="radio" default="1" label="COM_CROWDFUNDINGFINANCE_STRIPECONNECT_ENABLE_TEST_MODE" description="COM_CROWDFUNDINGFINANCE_STRIPECONNECT_ENABLE_TEST_MODE_DESC" class="btn-group">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+        <field name="stripe_sandbox_client_id" type="text" label="COM_CROWDFUNDINGFINANCE_STRIPECONNECT_SANDBOX_CLIENT_ID" description="COM_CROWDFUNDINGFINANCE_STRIPECONNECT_SANDBOX_CLIENT_ID_DESC" class="input-xxlarge" />
+        <field name="stripe_sandbox_secret_key" type="text" label="COM_CROWDFUNDINGFINANCE_STRIPECONNECT_SANDBOX_SECRET_KEY" description="COM_CROWDFUNDINGFINANCE_STRIPECONNECT_SANDBOX_SECRET_KEY_DESC" class="input-xxlarge" />
+        <field name="stripe_sandbox_published_key" type="text" label="COM_CROWDFUNDINGFINANCE_STRIPECONNECT_TEST_PUBLISHABLE_KEY" description="COM_CROWDFUNDINGFINANCE_STRIPECONNECT_TEST_PUBLISHABLE_KEY_DESC" class="input-xxlarge" />
+
+        <field name="stripe_button" type="list" default="blue-on-dark" label="COM_CROWDFUNDINGFINANCE_STRIPECONNECT_BUTTON" description="COM_CROWDFUNDINGFINANCE_STRIPECONNECT_BUTTON_DESC" >
+            <option value="blue-on-dark">COM_CROWDFUNDINGFINANCE_STRIPECONNECT_BLUE_ON_DARK</option>
+            <option value="blue-on-light">COM_CROWDFUNDINGFINANCE_STRIPECONNECT_BLUE_ON_LIGHT</option>
+            <option value="light-on-dark">COM_CROWDFUNDINGFINANCE_STRIPECONNECT_LIGHT_ON_DARK</option>
+            <option value="light-on-light">COM_CROWDFUNDINGFINANCE_STRIPECONNECT_LIGHT_ON_LIGHT</option>
+        </field>
+        <field name="stripe_expiration_period" type="text" default="7" label="COM_CROWDFUNDINGFINANCE_STRIPECONNECT_TOKEN_VALID_PERIOD" description="COM_CROWDFUNDINGFINANCE_STRIPECONNECT_TOKEN_VALID_PERIOD_DESC" />
+    </fieldset>
+</config>

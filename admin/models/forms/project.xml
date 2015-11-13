@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fieldset addfieldpath="/administrator/components/com_categories/models/fields" name="basic">
+
+        <field name="title" type="text" class="span12"
+               label="JGLOBAL_TITLE"
+               description="COM_CROWDFUNDING_FIELD_PROJECT_TITLE_DESC"
+               size="80"
+               filter="trim"
+               required="true"
+                />
+
+        <field name="alias" type="text" class="span12"
+               label="JFIELD_ALIAS_LABEL"
+               description="JFIELD_ALIAS_DESC"
+               size="80"
+                />
+
+        <field name="catid" type="category"
+               label="JCATEGORY"
+               description="JFIELD_CATEGORY_DESC"
+               extension="com_crowdfunding"
+                />
+
+        <field name="published" type="radio" class="btn-group"
+               label="JSTATUS"
+               description="JFIELD_PUBLISHED_DESC"
+               filter="intval"
+               size="1"
+               default="1"
+                >
+            <option value="1">JPUBLISHED</option>
+            <option value="0">JUNPUBLISHED</option>
+        </field>
+
+        <field name="approved" type="radio" class="btn-group"
+               label="COM_CROWDFUNDING_APPROVED"
+               description="COM_CROWDFUNDING_APPROVED_DESC"
+               filter="intval"
+               size="1"
+               default="0"
+                >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field name="id" type="text" class="readonly"
+               label="JGLOBAL_FIELD_ID_LABEL"
+               description="JGLOBAL_FIELD_ID_DESC"
+               readonly="true"
+               default="0"/>
+
+
+        <field name="short_desc" type="textarea" class="span12"
+               label="COM_CROWDFUNDING_SHORT_DESCRIPTION"
+               description="COM_CROWDFUNDING_SHORT_DESCRIPTION_DESC"
+               rows="10"
+                />
+
+        <field name="image" type="file"
+               label="COM_CROWDFUNDING_IMAGE"
+               description="COM_CROWDFUNDING_PROJECT_IMAGE_DESC"
+                />
+
+    </fieldset>
+
+    <fieldset name="funding">
+        <field name="goal" type="text"
+               label="COM_CROWDFUNDING_GOAL"
+               description="COM_CROWDFUNDING_FIELD_GOAL_DESC"
+                />
+
+        <field name="funded" type="text"
+               label="COM_CROWDFUNDING_FUNDED"
+               description="COM_CROWDFUNDING_FIELD_FUNDED_DESC"
+                />
+
+        <field name="funding_type" type="list"
+               label="COM_CROWDFUNDING_FUNDING_TYPE"
+               description="COM_CROWDFUNDING_FUNDING_TYPE_DESC"
+               size="1"
+               default="FIXED"
+                >
+            <option value="FIXED">FIXED</option>
+            <option value="FLEXIBLE">FLEXIBLE</option>
+        </field>
+
+        <field name="funding_days" type="text"
+               label="COM_CROWDFUNDING_FIELD_FUNDING_DAYS"
+               filter="trim"
+                />
+
+        <field name="funding_end" type="calendar"
+               label="COM_CROWDFUNDING_FIELD_FUNDING_END"
+               filter="trim"
+               default="NOW"
+                />
+
+    </fieldset>
+
+    <fieldset name="story">
+        <field name="description" type="editor" buttons="false" show="toggle"
+               label="JGLOBAL_DESCRIPTION"
+               description="COM_CROWDFUNDING_FIELD_PROJECT_DESCRIPTION"
+               filter="safehtml"
+               class="span12"
+                />
+
+        <field name="pitch_video" type="text" class="span12"
+               label="COM_CROWDFUNDING_PITCH_VIDEO"
+               description="COM_CROWDFUNDING_PITCH_VIDEO_DESC"
+               size="60"
+                />
+
+        <field name="pitch_image" type="file"
+               label="COM_CROWDFUNDING_PITCH_IMAGE"
+               description="COM_CROWDFUNDING_PITCH_IMAGE_DESC"
+                />
+
+    </fieldset>
+
+</form>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fieldset name="basic">
+
+        <field name="paypal_first_name" type="text" class="input-xxlarge"
+               label="COM_CROWDFUNDINGFINANCE_PAYPAL_FIRST_NAME"
+               description="COM_CROWDFUNDINGFINANCE_FIELD_PAYPAL_FIRST_NAME_DESC"
+               filter="trim"
+               />
+
+        <field name="paypal_last_name" type="text" class="input-xxlarge"
+               label="COM_CROWDFUNDINGFINANCE_PAYPAL_LAST_NAME"
+               description="COM_CROWDFUNDINGFINANCE_FIELD_PAYPAL_LAST_NAME_DESC"
+               />
+
+        <field name="paypal_email" type="email" class="input-xxlarge"
+               label="COM_CROWDFUNDINGFINANCE_PAYPAL_EMAIL"
+               description="COM_CROWDFUNDINGFINANCE_FIELD_PAYPAL_EMAIL_DESC"
+               />
+
+        <field name="iban" type="text" class="input-xxlarge"
+               label="COM_CROWDFUNDINGFINANCE_IBAN"
+               description="COM_CROWDFUNDINGFINANCE_FIELD_IBAN_DESC"
+               />
+
+        <field name="bank_account" type="textarea" class="input-xxlarge" rows="5"
+               label="COM_CROWDFUNDINGFINANCE_BANK_ACCOUNT"
+               description="COM_CROWDFUNDINGFINANCE_FIELD_BANK_ACCOUNT_DESC"
+               />
+
+        <field name="id" type="text" class="readonly"
+               label="COM_CROWDFUNDINGFINANCE_PROJECT_ID"
+               readonly="true"
+               default="0" />
+
+    </fieldset>
+
+</form>

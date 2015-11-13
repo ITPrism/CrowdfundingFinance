@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.4" type="plugin" group="crowdfunding" method="upgrade">
+    <name>PLG_CROWDFUNDING_PAYOUTOPTIONS</name>
+    <author>Todor Iliev</author>
+    <copyright>Copyright (C) 2015 Todor Iliev ( ITPrism.com ). All rights reserved.</copyright>
+    <license>http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPL</license>
+    <authorEmail>todor@itprism.com</authorEmail>
+    <authorUrl>http://itprism.com</authorUrl>
+    <version>2.2</version>
+    <creationDate>31 October, 2015</creationDate>
+    <description><![CDATA[
+	<p>Crowdfunding Payout Options is a plug-in that displays a form where the project owner will use to set a data about where he would like to receive the amount.</p>
+	<p><a href="http://itprism.com/" target="_blank">Subscribe for the newsletter</a> to receive information about updates and new ITPrism extensions.</p>
+	<p>Please, <a href="http://extensions.joomla.org/extensions/extension/e-commerce/donations/crowdfunding" target="_blank">vote for the extension</a> on Joomla! Extensions Directory</p>
+	]]></description>
+    
+    <files>
+        <filename plugin="payoutoptions">payoutoptions.php</filename>
+
+		<folder>js</folder>
+		<folder>language</folder>
+		<folder>tmpl</folder>
+    </files>
+    
+    <help url="PLG_CROWDFUNDING_PAYOUTOPTIONS_HELP_URL"/>
+
+    <config>
+        <fields name="params">
+
+            <fieldset name="paypal" label="PLG_CROWDFUNDING_PAYOUTOPTIONS_PAYPAL">
+                <field name="display_paypal" type="radio" default="0" label="PLG_CROWDFUNDING_PAYOUTOPTIONS_ENABLE_PAYPAL_DATA" description="PLG_CROWDFUNDING_PAYOUTOPTIONS_ENABLE_PAYPAL_DATA_DESC" class="btn-group">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+
+                <field name="display_paypal_info" type="radio" default="1" label="PLG_CROWDFUNDING_PAYOUTOPTIONS_DISPLAY_INFORMATION" description="PLG_CROWDFUNDING_PAYOUTOPTIONS_DISPLAY_PAYPAL_INFORMATION_DESC" class="btn-group">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+
+                <field name="paypal_requirements_link" type="text" label="PLG_CROWDFUNDING_PAYOUTOPTIONS_REQUIREMENTS_LINK" description="PLG_CROWDFUNDING_PAYOUTOPTIONS_PAYPAL_REQUIREMENTS_LINK_DESC" class="input-xxlarge" />
+
+                <field name="paypal_additional_information" type="textarea" label="PLG_CROWDFUNDING_PAYOUTOPTIONS_ADDITIONAL_INFORMATION" description="PLG_CROWDFUNDING_PAYOUTOPTIONS_PAYPAL_ADDITIONAL_INFORMATION_DESC" class="input-xxlarge" />
+            </fieldset>
+
+            <fieldset name="banktransfer" label="PLG_CROWDFUNDING_PAYOUTOPTIONS_BANKTRANSFER">
+                <field name="display_banktransfer" type="radio" default="0" label="PLG_CROWDFUNDING_PAYOUTOPTIONS_ENABLE_BANKTRANSFER_DATA" description="PLG_CROWDFUNDING_PAYOUTOPTIONS_ENABLE_BANKTRANSFER_DATA_DESC" class="btn-group">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="display_banktransfer_info" type="radio" default="1" label="PLG_CROWDFUNDING_PAYOUTOPTIONS_DISPLAY_INFORMATION" description="PLG_CROWDFUNDING_PAYOUTOPTIONS_DISPLAY_BANKTRANSFER_INFORMATION_DESC" class="btn-group">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="banktransfer_requirements_link" type="text" label="PLG_CROWDFUNDING_PAYOUTOPTIONS_REQUIREMENTS_LINK" description="PLG_CROWDFUNDING_PAYOUTOPTIONS_BANKTRANSFER_REQUIREMENTS_LINK_DESC" class="input-xxlarge" />
+                <field name="banktransfer_additional_information" type="textarea" label="PLG_CROWDFUNDING_PAYOUTOPTIONS_ADDITIONAL_INFORMATION" description="PLG_CROWDFUNDING_PAYOUTOPTIONS_BANKTRANSFER_ADDITIONAL_INFORMATION_DESC" class="input-xxlarge" />
+            </fieldset>
+
+            <fieldset name="stripe" label="PLG_CROWDFUNDING_PAYOUTOPTIONS_STRIPE" addfieldpath="/administrator/components/com_crowdfunding/models/fields">
+                <field name="display_stripe" type="radio" default="0" label="PLG_CROWDFUNDING_PAYOUTOPTIONS_ENABLE_STRIPE" description="PLG_CROWDFUNDING_PAYOUTOPTIONS_ENABLE_STRIPE_DESC" class="btn-group">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+
+                <field name="display_stripe_info" type="radio" default="1" label="PLG_CROWDFUNDING_PAYOUTOPTIONS_DISPLAY_INFORMATION" description="PLG_CROWDFUNDING_PAYOUTOPTIONS_DISPLAY_STRIPE_INFORMATION_DESC" class="btn-group">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="stripe_requirements_link" type="text" label="PLG_CROWDFUNDING_PAYOUTOPTIONS_REQUIREMENTS_LINK" description="PLG_CROWDFUNDING_PAYOUTOPTIONS_STRIPE_REQUIREMENTS_LINK_DESC" class="input-xxlarge" />
+                <field name="stripe_additional_information" type="textarea" label="PLG_CROWDFUNDING_PAYOUTOPTIONS_ADDITIONAL_INFORMATION" description="PLG_CROWDFUNDING_PAYOUTOPTIONS_STRIPE_ADDITIONAL_INFORMATION_DESC" class="input-xxlarge" />
+                <field name="stripe_redirect_uri" type="cfurl" default="index.php?option=com_crowdfundingfinance&amp;task=payouts.authorize&amp;payment_service=stripeconnect" label="PLG_CROWDFUNDING_PAYOUTOPTIONS_STRIPE_REDIRECT_URL" description="PLG_CROWDFUNDING_PAYOUTOPTIONS_STRIPE_REDIRECT_URL_DESC" class="input-xxlarge" rows="5" />
+            </fieldset>
+        </fields>
+    </config>
+
+</extension>
