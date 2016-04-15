@@ -1,9 +1,9 @@
 <?php
 /**
- * @package      CrowdfundingFinance
+ * @package      Crowdfundingfinance
  * @subpackage   Components
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -20,7 +20,7 @@ defined('_JEXEC') or die;
         <ul class="thumbnails">
             <li class="span12">
                 <div class="thumbnail">
-                    <img src="<?php echo $this->imagesUrl . "/" . $this->item->image; ?>"
+                    <img src="<?php echo $this->imagesUrl . '/' . $this->item->image; ?>"
                          alt="<?php echo $this->escape($this->item->title); ?>"/>
 
                     <h3><?php echo $this->escape($this->item->title); ?></h3>
@@ -37,11 +37,11 @@ defined('_JEXEC') or die;
 
     </div>
     <div class="span3">
-        <?php echo $this->loadTemplate("basic"); ?>
+        <?php echo $this->loadTemplate('basic'); ?>
     </div>
 
     <div class="span3">
-        <?php echo $this->loadTemplate("payout"); ?>
+        <?php echo $this->loadTemplate('payout'); ?>
     </div>
 </div>
 

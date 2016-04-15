@@ -1,9 +1,9 @@
 <?php
 /**
- * @package      CrowdfundingFinance
+ * @package      Crowdfundingfinance
  * @subpackage   Libraries
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -21,14 +21,14 @@ if (!defined('CROWDFUNDINGFINANCE_PATH_LIBRARY')) {
     define('CROWDFUNDINGFINANCE_PATH_LIBRARY', JPATH_LIBRARIES . DIRECTORY_SEPARATOR . 'crowdfundingfinance');
 }
 
-JLoader::registerNamespace('CrowdfundingFinance', JPATH_LIBRARIES);
+JLoader::registerNamespace('Crowdfundingfinance', JPATH_LIBRARIES);
 
 // Register some helpers
 JLoader::register(
-    'CrowdfundingFinanceHelper',
+    'CrowdfundingfinanceHelper',
     CROWDFUNDINGFINANCE_PATH_COMPONENT_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'crowdfundingfinance.php'
 );
-JLoader::register('CrowdfundingFinanceHelperRoute', CROWDFUNDINGFINANCE_PATH_COMPONENT_SITE . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'route.php');
+JLoader::register('CrowdfundingfinanceHelperRoute', CROWDFUNDINGFINANCE_PATH_COMPONENT_SITE . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'route.php');
 
 // Include HTML helpers path
 JHtml::addIncludePath(CROWDFUNDINGFINANCE_PATH_COMPONENT_SITE . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'html');

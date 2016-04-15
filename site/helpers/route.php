@@ -3,16 +3,12 @@
  * @package      CrowdfundingFinance
  * @subpackage   Components
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 // no direct access
 defined('_JEXEC') or die;
-
-// Component Helper
-jimport('joomla.application.component.helper');
-jimport('joomla.application.categories');
 
 /**
  * Component Route Helper that help to find a menu item.
@@ -58,8 +54,7 @@ abstract class CrowdfundingFinanceHelperRoute
         //Create the link
         $link = 'index.php?option=com_crowdfunding&view=details&id=' . $id;
         if ($catid > 1) {
-
-            $options = array("published" => 2);
+            $options = array('published' => 2);
 
             $categories = JCategories::getInstance('crowdfunding', $options);
             $category   = $categories->get($catid);
@@ -72,7 +67,7 @@ abstract class CrowdfundingFinanceHelperRoute
         }
 
         // Set a screen page
-        if (!empty($screen)) {
+        if (is_string($screen) and $screen !== '') {
             $link .= '&screen=' . $screen;
         }
 
@@ -127,7 +122,7 @@ abstract class CrowdfundingFinanceHelperRoute
      *
      * @return string
      */
-    public static function getBackingRoute($id, $catid, $layout = "default", $rewardId = null)
+    public static function getBackingRoute($id, $catid, $layout = 'default', $rewardId = null)
     {
         /**
          *
@@ -157,11 +152,11 @@ abstract class CrowdfundingFinanceHelperRoute
             }
         }
 
-        if (!is_null($layout)) {
+        if ($layout !== null) {
             $link .= '&layout=' . $layout;
         }
 
-        if (!is_null($rewardId) and $rewardId > 0) {
+        if (is_numeric($rewardId) and $rewardId > 0) {
             $link .= '&rid=' . (int)$rewardId;
         }
 
@@ -178,7 +173,7 @@ abstract class CrowdfundingFinanceHelperRoute
     /**
      * @param    int $id    The id of the item.
      * @param    int $catid The id of the category.
-     * @param    int $layout Layout name.
+     * @param    string $layout Layout name.
      *
      * @return   string Return URI
      */
@@ -212,8 +207,8 @@ abstract class CrowdfundingFinanceHelperRoute
             }
         }
 
-        if (!empty($layout)) {
-            $link .= "&layout=" . $layout;
+        if (is_string($layout) and $layout !== '') {
+            $link .= '&layout=' . $layout;
         }
 
         // Looking for menu item (Itemid)
@@ -228,7 +223,7 @@ abstract class CrowdfundingFinanceHelperRoute
 
     /**
      * @param    int    $id     The id of the item.
-     *                          
+     *
      * @return string
      */
     public static function getFormRoute($id)
@@ -312,10 +307,8 @@ abstract class CrowdfundingFinanceHelperRoute
         }
 
         if ($needles) {
-
             foreach ($needles as $view => $ids) {
                 if (isset(self::$lookup[$view])) {
-
                     foreach ($ids as $id) {
                         if (isset(self::$lookup[$view][(int)$id])) {
                             return self::$lookup[$view][(int)$id];
@@ -345,7 +338,7 @@ abstract class CrowdfundingFinanceHelperRoute
      */
     public static function prepareCategoriesSegments($catId, &$segments, $mId = null)
     {
-        $menuCatid  = $mId;
+//        $menuCatid  = $mId;
         $categories = JCategories::getInstance('Crowdfunding');
         $category   = $categories->get($catId);
 
@@ -356,7 +349,7 @@ abstract class CrowdfundingFinanceHelperRoute
 
             $array = array();
             foreach ($path as $id) {
-                if ((int)$id == (int)$mId) {
+                if ((int)$id === (int)$mId) {
                     break;
                 }
 
@@ -380,9 +373,9 @@ abstract class CrowdfundingFinanceHelperRoute
         $query = $db->getQuery(true);
 
         $query
-            ->select("a.alias, a.catid")
-            ->from($query->quoteName("#__crowdf_projects", "a"))
-            ->where("a.id = " . (int)$id);
+            ->select('a.alias, a.catid')
+            ->from($query->quoteName('#__crowdf_projects', 'a'))
+            ->where('a.id = ' . (int)$id);
 
         $db->setQuery($query);
         $result = $db->loadObject();

@@ -1,9 +1,9 @@
 <?php
 /**
- * @package      CrowdfundingFinance
+ * @package      Crowdfundingfinance
  * @subpackage   Components
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -17,7 +17,7 @@ defined('_JEXEC') or die;
  * @subpackage     Crowdfunding
  * @since          1.6
  */
-class CrowdfundingFinanceControllerPayout extends Prism\Controller\Form\Backend
+class CrowdfundingfinanceControllerPayout extends Prism\Controller\Form\Backend
 {
     public function save($key = null, $urlVar = null)
     {
@@ -35,7 +35,7 @@ class CrowdfundingFinanceControllerPayout extends Prism\Controller\Form\Backend
         );
 
         $model = $this->getModel();
-        /** @var $model CrowdfundingFinanceModelPayout */
+        /** @var $model CrowdfundingfinanceModelPayout */
 
         $form = $model->getForm($data, false);
         /** @var $form JForm */

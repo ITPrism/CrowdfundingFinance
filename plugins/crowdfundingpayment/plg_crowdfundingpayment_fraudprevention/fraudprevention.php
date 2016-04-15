@@ -3,7 +3,7 @@
  * @package      CrowdfundingPayment
  * @subpackage   Plugins
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 
 jimport('Crowdfunding.init');
-jimport('CrowdfundingFinance.init');
+jimport('Crowdfundingfinance.init');
 
 /**
  * CrowdfundingPayment - Fraud Prevention validates some states during payment process.
@@ -65,7 +65,7 @@ class plgCrowdfundingPaymentFraudPrevention extends JPlugin
         // Display login form
         if (!$userId) {
             $html[] = '<p class="bg-warning p-5">';
-            $html[] = '<span class="glyphicon glyphicon-warning-sign"></span>';
+            $html[] = '<span class="fa fa-exclamation-triangle"></span>';
             $html[] = JText::_('PLG_CROWDFUNDINGPAYMENT_FRAUD_PREVENTION_ERROR_NOT_REGISTERED');
             $html[] = '</p>';
         }
@@ -77,19 +77,17 @@ class plgCrowdfundingPaymentFraudPrevention extends JPlugin
         /** @var  $componentParams Joomla\Registry\Registry */
 
         // Verify maximum allowed amount for contribution.
-
         $allowedContributedAmount = $amount->setValue($componentParams->get('protection_max_contributed_amount'))->parse();
 
         // Validate maximum allowed amount.
         if ($allowedContributedAmount and ($allowedContributedAmount < (float)$item->amount)) {
             $html[] = '<p class="bg-warning p-5">';
-            $html[] = '<span class="glyphicon glyphicon-warning-sign"></span>';
+            $html[] = '<span class="fa fa-exclamation-triangle"></span>';
             $html[] = JText::sprintf('PLG_CROWDFUNDINGPAYMENT_FRAUD_PREVENTION_ERROR_CONTRIBUTION_AMOUNT_S', $amount->setValue($allowedContributedAmount)->formatCurrency());
             $html[] = '</p>';
         }
 
         // Verify the number of payments per project.
-
         $allowedPaymentsPerProject = (int)$componentParams->get('protection_payments_per_project');
         if ($allowedPaymentsPerProject > 0) {
             $userStatistics = new Crowdfunding\Statistics\User(JFactory::getDbo(), $userId);
@@ -99,11 +97,10 @@ class plgCrowdfundingPaymentFraudPrevention extends JPlugin
             // Validate number of payments per project.
             if ($paymentsPerProject >= $allowedPaymentsPerProject) {
                 $html[] = '<p class="bg-warning p-5">';
-                $html[] = '<span class="glyphicon glyphicon-warning-sign"></span>';
+                $html[] = '<span class="fa fa-exclamation-triangle"></span>';
                 $html[] = JText::sprintf('PLG_CROWDFUNDINGPAYMENT_FRAUD_PREVENTION_ERROR_PAYMENT_PER_PROJECT_D', $allowedPaymentsPerProject);
                 $html[] = '</p>';
             }
-
         }
 
         return (count($html) > 0) ? implode("\n", $html) : null;

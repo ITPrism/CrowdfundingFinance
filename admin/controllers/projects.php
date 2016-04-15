@@ -1,9 +1,9 @@
 <?php
 /**
- * @package      CrowdfundingFinance
+ * @package      Crowdfundingfinance
  * @subpackage   Components
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -13,12 +13,12 @@ defined('_JEXEC') or die;
 /**
  * Crowdfunding projects controller
  *
- * @package      CrowdfundingFinance
+ * @package      Crowdfundingfinance
  * @subpackage   Components
  */
-class CrowdfundingFinanceControllerProjects extends Prism\Controller\Admin
+class CrowdfundingfinanceControllerProjects extends Prism\Controller\Admin
 {
-    public function getModel($name = 'Project', $prefix = 'CrowdfundingFinanceModel', $config = array('ignore_request' => true))
+    public function getModel($name = 'Project', $prefix = 'CrowdfundingfinanceModel', $config = array('ignore_request' => true))
     {
         $model = parent::getModel($name, $prefix, $config);
         return $model;

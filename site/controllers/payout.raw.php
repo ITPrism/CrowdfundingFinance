@@ -3,7 +3,7 @@
  * @package      CrowdfundingFinance
  * @subpackage   Component
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -32,7 +32,6 @@ class CrowdfundingFinanceControllerPayout extends JControllerForm
     public function getModel($name = 'Payout', $prefix = 'CrowdfundingFinanceModel', $config = array('ignore_request' => true))
     {
         $model = parent::getModel($name, $prefix, $config);
-
         return $model;
     }
     
@@ -87,11 +86,8 @@ class CrowdfundingFinanceControllerPayout extends JControllerForm
         /** @var $model CrowdfundingFinanceModelPayout */
 
         try {
-
             $model->save($data);
-
         } catch (Exception $e) {
-
             $response
                 ->setTitle(JText::_('COM_CROWDFUNDINGFINANCE_FAIL'))
                 ->setText(JText::_('COM_CROWDFUNDINGFINANCE_ERROR_SYSTEM'))

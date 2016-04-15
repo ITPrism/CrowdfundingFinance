@@ -1,16 +1,16 @@
 <?php
 /**
- * @package      CrowdfundingFinance
+ * @package      Crowdfundingfinance
  * @subpackage   Components
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 // no direct access
 defined('_JEXEC') or die;
 
-class CrowdfundingFinanceViewProject extends JViewLegacy
+class CrowdfundingfinanceViewProject extends JViewLegacy
 {
     /**
      * @var JDocumentHtml
@@ -38,22 +38,15 @@ class CrowdfundingFinanceViewProject extends JViewLegacy
     protected $documentTitle;
     protected $option;
 
-    public function __construct($config)
-    {
-        parent::__construct($config);
-        $this->option = JFactory::getApplication()->input->get("option");
-    }
-
-    /**
-     * Display the view
-     */
     public function display($tpl = null)
     {
+        $this->option = JFactory::getApplication()->input->get('option');
+        
         $app    = JFactory::getApplication();
-        $itemId = $app->input->getUint("id");
+        $itemId = $app->input->getUint('id');
 
         $model        = $this->getModel();
-        $this->params = JComponentHelper::getParams("com_crowdfundingfinance");
+        $this->params = JComponentHelper::getParams('com_crowdfundingfinance');
 
         $this->item = $model->getItem($itemId);
 
@@ -63,14 +56,14 @@ class CrowdfundingFinanceViewProject extends JViewLegacy
         $this->payout = $this->stats->getPayoutStatistics();
 
         /** @var  $cParams Joomla\Registry\Registry */
-        $cParams        = JComponentHelper::getParams("com_crowdfunding");
+        $cParams        = JComponentHelper::getParams('com_crowdfunding');
         $this->cfParams = $cParams;
 
-        $imagesFolder    = $this->cfParams->get("images_directory", "images/crowdfunding");
+        $imagesFolder    = $this->cfParams->get('images_directory', 'images/crowdfunding');
         $this->imagesUrl = JUri::root() . $imagesFolder;
 
         // Get currency.
-        $currency = Crowdfunding\Currency::getInstance(JFactory::getDbo(), $this->cfParams->get("project_currency"));
+        $currency = Crowdfunding\Currency::getInstance(JFactory::getDbo(), $this->cfParams->get('project_currency'));
 
         $this->amount = new Crowdfunding\Amount($this->cfParams);
         $this->amount->setCurrency($currency);
@@ -112,12 +105,12 @@ class CrowdfundingFinanceViewProject extends JViewLegacy
         JHtml::_('behavior.keepalive');
         JHtml::_('behavior.formvalidation');
 
-        $d3Cdn = (bool)$this->params->get("d3_cdn", true);
-        JHtml::_("prism.ui.d3", $d3Cdn);
+        $d3Cdn = (bool)$this->params->get('d3_cdn', true);
+        JHtml::_('Prism.ui.d3', $d3Cdn);
 
-        $js = "
-            cfProjectId = " . $this->item->id . ";
-        ";
+        $js = '
+            cfProjectId = ' . $this->item->id . ';
+        ';
         $this->document->addScriptDeclaration($js);
         $this->document->addScript('../media/' . $this->option . '/js/admin/' . JString::strtolower($this->getName()) . '.js');
     }

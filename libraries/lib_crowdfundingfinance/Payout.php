@@ -1,15 +1,15 @@
 <?php
 /**
- * @package      CrowdfundingFinance
+ * @package      Crowdfundingfinance
  * @subpackage   Payouts
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace CrowdfundingFinance;
+namespace Crowdfundingfinance;
 
-use Prism\Database\Table;
+use Prism\Database;
 use Joomla\Registry\Registry;
 
 defined('JPATH_PLATFORM') or die;
@@ -17,10 +17,10 @@ defined('JPATH_PLATFORM') or die;
 /**
  * This class provides functionality that manage a payout.
  *
- * @package      CrowdfundingFinance
+ * @package      Crowdfundingfinance
  * @subpackage   Payouts
  */
-class Payout extends Table
+class Payout extends Database\Table
 {
     protected $id;
 
@@ -42,7 +42,7 @@ class Payout extends Table
      *    "project_id" => 1
      * );
      *
-     * $payout    = new CrowdfundingFinance\Payout();
+     * $payout    = new Crowdfundingfinance\Payout();
      * $payout->setDb(\JFactory::getDbo());
      * $payout->load($keys);
      * </code>
@@ -50,14 +50,14 @@ class Payout extends Table
      * @param int|array $keys Project ID or keys
      * @param array $options
      */
-    public function load($keys, $options = array())
+    public function load($keys, array $options = array())
     {
         if (array_key_exists('secret_key', $options) and $options['secret_key'] !== '') {
             $this->secret_key = $options['secret_key'];
         }
 
         if (!$this->secret_key) {
-            throw new \InvalidArgumentException('It is missing a key used for encryption and decrypting data.');
+            throw new \InvalidArgumentException('It is missing a key used for encrypting and decrypting data.');
         }
 
         $query = $this->db->getQuery(true);
@@ -96,7 +96,7 @@ class Payout extends Table
      * <code>
      * $id  = 1;
      *
-     * $payout    = new CrowdfundingFinance\Payout(\JFactory::getDbo());
+     * $payout    = new Crowdfundingfinance\Payout(\JFactory::getDbo());
      * $payout->load($id);
      *
      * if (!$payout->getId()) {
@@ -115,7 +115,7 @@ class Payout extends Table
      * <code>
      * $id  = 1;
      *
-     * $payout    = new CrowdfundingFinance\Payout(\JFactory::getDbo());
+     * $payout    = new Crowdfundingfinance\Payout(\JFactory::getDbo());
      * $payout->load($id);
      *
      * $paypalEmail = $payout->getPaypalEmail();
@@ -134,7 +134,7 @@ class Payout extends Table
      * <code>
      * $id  = 1;
      *
-     * $payout    = new CrowdfundingFinance\Payout(\JFactory::getDbo());
+     * $payout    = new Crowdfundingfinance\Payout(\JFactory::getDbo());
      * $payout->load($id);
      *
      * $paypalFirstName = $payout->getPayPalFirstName();
@@ -153,7 +153,7 @@ class Payout extends Table
      * <code>
      * $id  = 1;
      *
-     * $payout    = new CrowdfundingFinance\Payout(\JFactory::getDbo());
+     * $payout    = new Crowdfundingfinance\Payout(\JFactory::getDbo());
      * $payout->load($id);
      *
      * $paypalLastName = $payout->getPayPalLastName();
@@ -172,7 +172,7 @@ class Payout extends Table
      * <code>
      * $id  = 1;
      *
-     * $payout    = new CrowdfundingFinance\Payout(\JFactory::getDbo());
+     * $payout    = new Crowdfundingfinance\Payout(\JFactory::getDbo());
      * $payout->load($id);
      *
      * $iban = $payout->getIban();
@@ -191,7 +191,7 @@ class Payout extends Table
      * <code>
      * $id  = 1;
      *
-     * $payout    = new CrowdfundingFinance\Payout(\JFactory::getDbo());
+     * $payout    = new Crowdfundingfinance\Payout(\JFactory::getDbo());
      * $payout->load($id);
      *
      * $bankAccount = $payout->getBankAccount();
@@ -210,7 +210,7 @@ class Payout extends Table
      * <code>
      * $id  = 1;
      *
-     * $payout    = new CrowdfundingFinance\Payout(\JFactory::getDbo());
+     * $payout    = new Crowdfundingfinance\Payout(\JFactory::getDbo());
      * $payout->load($id);
      *
      * echo $payout->getProjectId();
@@ -230,7 +230,7 @@ class Payout extends Table
      * $id  = 1;
      * $projectId = 2;
      *
-     * $payout    = new CrowdfundingFinance\Payout(\JFactory::getDbo());
+     * $payout    = new Crowdfundingfinance\Payout(\JFactory::getDbo());
      * $payout->load($id);
      *
      * $payout->setProjectId($projectId);
@@ -257,7 +257,7 @@ class Payout extends Table
      * $stripe = new Registry;
      * $stripe->set('stripconnect.production.access_token', 'at_asdf1234');
      *
-     * $payout    = new CrowdfundingFinance\Payout(\JFactory::getDbo());
+     * $payout    = new Crowdfundingfinance\Payout(\JFactory::getDbo());
      * $payout->setSecretKey($secretKey);
      * $payout->load($id);
      *
@@ -338,7 +338,7 @@ class Payout extends Table
      * <code>
      * $payoutId  = 1;
      *
-     * $payout    = new CrowdfundingFinance\Payout(\JFactory::getDbo());
+     * $payout    = new Crowdfundingfinance\Payout(\JFactory::getDbo());
      * $payout->load($payoutId);
      *
      * $stripe = $payout->getStripe();
@@ -360,7 +360,7 @@ class Payout extends Table
      *
      * $stripeData->set('stripeconnect.production.access_token', 'tk_asdf1234');
      *
-     * $payout    = new CrowdfundingFinance\Payout(\JFactory::getDbo());
+     * $payout    = new Crowdfundingfinance\Payout(\JFactory::getDbo());
      * $payout->setSecretKey('asdf1234');
      * $payout->load($payoutId);
      *
@@ -384,7 +384,7 @@ class Payout extends Table
      * <code>
      * $payoutId = 1;
      *
-     * $payout    = new CrowdfundingFinance\Payout(\JFactory::getDbo());
+     * $payout    = new Crowdfundingfinance\Payout(\JFactory::getDbo());
      * $payout->setSecretKey('asdf1234');
      *
      * $payout->load($payoutId);
@@ -407,7 +407,7 @@ class Payout extends Table
      * <code>
      * $payoutId = 1;
      *
-     * $payout    = new CrowdfundingFinance\Payout(\JFactory::getDbo());
+     * $payout    = new Crowdfundingfinance\Payout(\JFactory::getDbo());
      * $payout->setSecretKey('asdf1234');
      *
      * $payout->load($payoutId);

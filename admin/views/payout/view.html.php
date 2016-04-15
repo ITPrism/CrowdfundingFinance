@@ -1,16 +1,16 @@
 <?php
 /**
- * @package      CrowdfundingFinance
+ * @package      Crowdfundingfinance
  * @subpackage   Components
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 // no direct access
 defined('_JEXEC') or die;
 
-class CrowdfundingFinanceViewPayout extends JViewLegacy
+class CrowdfundingfinanceViewPayout extends JViewLegacy
 {
     /**
      * @var JDocumentHtml
@@ -24,17 +24,13 @@ class CrowdfundingFinanceViewPayout extends JViewLegacy
     protected $documentTitle;
     protected $option;
 
-    public function __construct($config)
-    {
-        parent::__construct($config);
-        $this->option = JFactory::getApplication()->input->get("option");
-    }
-
     /**
      * Display the view
      */
     public function display($tpl = null)
     {
+        $this->option = JFactory::getApplication()->input->get("option");
+
         $this->state = $this->get('State');
         $this->item  = $this->get('Item');
         $this->form  = $this->get('Form');
@@ -54,7 +50,7 @@ class CrowdfundingFinanceViewPayout extends JViewLegacy
     protected function addToolbar()
     {
         JFactory::getApplication()->input->set('hidemainmenu', true);
-        $isNew = ($this->item->id == 0);
+        $isNew = ((int)$this->item->id === 0);
 
         $this->documentTitle = $isNew ? JText::_('COM_CROWDFUNDINGFINANCE_NEW_PAYOUT') : JText::_('COM_CROWDFUNDINGFINANCE_EDIT_PAYOUT');
 

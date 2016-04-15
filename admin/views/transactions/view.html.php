@@ -1,16 +1,16 @@
 <?php
 /**
- * @package      CrowdfundingFinance
+ * @package      Crowdfundingfinance
  * @subpackage   Components
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 // no direct access
 defined('_JEXEC') or die;
 
-class CrowdfundingFinanceViewTransactions extends JViewLegacy
+class CrowdfundingfinanceViewTransactions extends JViewLegacy
 {
     /**
      * @var JDocumentHtml
@@ -134,7 +134,7 @@ class CrowdfundingFinanceViewTransactions extends JViewLegacy
      */
     protected function addSidebar()
     {
-        CrowdfundingFinanceHelper::addSubmenu($this->getName());
+        CrowdfundingfinanceHelper::addSubmenu($this->getName());
         
         // Create object Filters and load some filters options.
         $filters = Crowdfunding\Filters::getInstance(JFactory::getDbo());
@@ -184,14 +184,12 @@ class CrowdfundingFinanceViewTransactions extends JViewLegacy
 
         // Add actions used for specific payment plugins.
         if (count($this->enabledSpecificPlugins) > 0) {
-
             JToolbarHelper::divider();
 
             // Add custom buttons
             $bar = JToolbar::getInstance('toolbar');
             $bar->appendButton('Confirm', JText::_('COM_CROWDFUNDINGFINANCE_QUESTION_CAPTURE'), 'checkin', JText::_('COM_CROWDFUNDINGFINANCE_CAPTURE'), 'payments.doCapture', true);
             $bar->appendButton('Confirm', JText::_('COM_CROWDFUNDINGFINANCE_QUESTION_VOID'), 'cancel-circle', JText::_('COM_CROWDFUNDINGFINANCE_VOID'), 'payments.doVoid', true);
-
         }
 
         JToolbarHelper::divider();
@@ -220,6 +218,10 @@ class CrowdfundingFinanceViewTransactions extends JViewLegacy
         JHtml::_('bootstrap.tooltip');
         JHtml::_('formbehavior.chosen', 'select');
 
-        JHtml::_('prism.ui.joomlaList');
+        JHtml::_('Prism.ui.joomlaList');
+        JHtml::_('Prism.ui.pnotify');
+        JHtml::_('Prism.ui.joomlaHelper');
+
+        $this->document->addScript('../media/' . $this->option . '/js/admin/' . JString::strtolower($this->getName()) . '.js');
     }
 }

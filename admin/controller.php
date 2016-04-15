@@ -1,9 +1,9 @@
 <?php
 /**
- * @package      CrowdfundingFinance
+ * @package      Crowdfundingfinance
  * @subpackage   Components
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -13,30 +13,23 @@ defined('_JEXEC') or die;
 /**
  * Default controller
  *
- * @package        CrowdfundingFinance
+ * @package        Crowdfundingfinance
  * @subpackage     Components
  */
-class CrowdfundingFinanceController extends JControllerLegacy
+class CrowdfundingfinanceController extends JControllerLegacy
 {
-    protected $option;
-
-    public function __construct($config)
-    {
-        parent::__construct($config);
-        $this->option = JFactory::getApplication()->input->get("option");
-    }
-
     public function display($cachable = false, $urlparams = array())
     {
         $viewName = $this->input->getCmd('view', 'dashboard');
-        $this->input->set("view", $viewName);
+        $this->input->set('view', $viewName);
 
         $doc = JFactory::getDocument();
-        $doc->addStyleSheet("../media/" . $this->option . '/css/backend.style.css');
+        $doc->addStyleSheet('../media/com_crowdfundingfinance/css/backend.style.css');
+        JHtml::_('Prism.ui.backendStyles');
+        JHtml::_('Prism.ui.styles');
 
         parent::display($cachable, $urlparams);
 
         return $this;
-
     }
 }

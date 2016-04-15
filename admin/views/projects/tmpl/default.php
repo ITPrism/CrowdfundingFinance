@@ -1,9 +1,9 @@
 <?php
 /**
- * @package      CrowdfundingFinance
+ * @package      Crowdfundingfinance
  * @subpackage   Components
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -23,17 +23,14 @@ defined('_JEXEC') or die;
 
             <div id="filter-bar" class="btn-toolbar">
                 <div class="filter-search btn-group pull-left">
-                    <label for="filter_search"
-                           class="element-invisible"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></label>
+                    <label for="filter_search" class="element-invisible"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></label>
                     <input type="text" name="filter_search" id="filter_search" class="hasTooltip"
                            placeholder="<?php echo JText::_('COM_CROWDFUNDINGFINANCE_SEARCH_IN_TITLE'); ?>"
                            value="<?php echo $this->escape($this->state->get('filter.search')); ?>"
                            title="<?php echo JText::_('COM_CROWDFUNDINGFINANCE_SEARCH_IN_PROJECTS_TOOLTIP'); ?>"/>
                 </div>
                 <div class="btn-group pull-left">
-                    <button class="btn hasTooltip" type="submit"
-                            title="<?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?>"><i class="icon-search"></i>
-                    </button>
+                    <button class="btn hasTooltip" type="submit" title="<?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?>"><i class="icon-search"></i></button>
                     <button class="btn hasTooltip" type="button" title="<?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?>"
                             onclick="document.getElementById('filter_search').value='';this.form.submit();"><i
                             class="icon-remove"></i></button>
@@ -50,9 +47,9 @@ defined('_JEXEC') or die;
                             onchange="Joomla.orderTable()">
                         <option value=""><?php echo JText::_('JFIELD_ORDERING_DESC'); ?></option>
                         <option
-                            value="asc" <?php if ($this->listDirn == 'asc') echo 'selected="selected"'; ?>><?php echo JText::_('JGLOBAL_ORDER_ASCENDING'); ?></option>
+                            value="asc" <?php if ($this->listDirn === 'asc') echo 'selected="selected"'; ?>><?php echo JText::_('JGLOBAL_ORDER_ASCENDING'); ?></option>
                         <option
-                            value="desc" <?php if ($this->listDirn == 'desc') echo 'selected="selected"'; ?>><?php echo JText::_('JGLOBAL_ORDER_DESCENDING'); ?></option>
+                            value="desc" <?php if ($this->listDirn === 'desc') echo 'selected="selected"'; ?>><?php echo JText::_('JGLOBAL_ORDER_DESCENDING'); ?></option>
                     </select>
                 </div>
                 <div class="btn-group pull-right hidden-phone">

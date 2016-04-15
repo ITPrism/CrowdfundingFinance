@@ -1,32 +1,28 @@
 <?php
 /**
- * @package      CrowdfundingFinance
+ * @package      Crowdfundingfinance
  * @subpackage   Stripe
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-namespace CrowdfundingFinance\Stripe;
+namespace Crowdfundingfinance\Stripe;
 
 use Joomla\Registry\Registry;
-use CrowdfundingFinance\Payout;
+use Crowdfundingfinance\Payout;
 use League\OAuth2\Client\Token\AccessToken;
 use AdamPaterson\OAuth2\Client\Provider\Stripe;
 
 // Import Stripe library.
-jimport('Prism.libs.GuzzleHttp.init');
-jimport('Prism.libs.OAuth2.init');
-jimport('Prism.libs.Psr.init');
-jimport('Prism.libs.RandomLib.init');
-jimport('Prism.libs.SecurityLib.init');
+jimport('Prism.libs.init');
 
 defined('JPATH_PLATFORM') or die;
 
 /**
  * This class provides some helpful functions used for interacting with Stripe.
  *
- * @package      CrowdfundingFinance
+ * @package      Crowdfundingfinance
  * @subpackage   Stripe
  */
 abstract class Helper
@@ -45,7 +41,6 @@ abstract class Helper
     public static function getPayoutAccessToken($apiKeys, Payout $payout, $expires = 7)
     {
         try {
-
             $token = $payout->getStripe();
 
             // Try to get an access token (using the authorization code grant)

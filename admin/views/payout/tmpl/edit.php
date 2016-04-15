@@ -1,9 +1,9 @@
 <?php
 /**
- * @package      CrowdfundingFinance
+ * @package      Crowdfundingfinance
  * @subpackage   Components
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -14,16 +14,12 @@ defined('_JEXEC') or die;
     <div class="span6 form-horizontal">
         <form action="<?php echo JRoute::_('index.php?option=com_crowdfundingfinance'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 
-            <fieldset>
-
-                <?php echo $this->form->getControlGroup('paypal_first_name'); ?>
-                <?php echo $this->form->getControlGroup('paypal_last_name'); ?>
-                <?php echo $this->form->getControlGroup('paypal_email'); ?>
-                <?php echo $this->form->getControlGroup('iban'); ?>
-                <?php echo $this->form->getControlGroup('bank_account'); ?>
-                <?php echo $this->form->getControlGroup('id'); ?>
-
-            </fieldset>
+            <?php echo $this->form->renderField('paypal_first_name'); ?>
+            <?php echo $this->form->renderField('paypal_last_name'); ?>
+            <?php echo $this->form->renderField('paypal_email'); ?>
+            <?php echo $this->form->renderField('iban'); ?>
+            <?php echo $this->form->renderField('bank_account'); ?>
+            <?php echo $this->form->renderField('id'); ?>
 
             <input type="hidden" name="task" value=""/>
             <?php echo JHtml::_('form.token'); ?>

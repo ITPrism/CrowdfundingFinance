@@ -1,9 +1,9 @@
 <?php
 /**
- * @package      CrowdfundingFinance
+ * @package      Crowdfundingfinance
  * @subpackage   Components
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -17,9 +17,9 @@ defined('_JEXEC') or die;
  * @subpackage     Crowdfunding
  * @since          1.6
  */
-class CrowdfundingFinanceControllerPayout extends JControllerLegacy
+class CrowdfundingfinanceControllerPayout extends JControllerLegacy
 {
-    public function getModel($name = 'Payout', $prefix = 'CrowdfundingFinanceModel', $config = array('ignore_request' => true))
+    public function getModel($name = 'Payout', $prefix = 'CrowdfundingfinanceModel', $config = array('ignore_request' => true))
     {
         $model = parent::getModel($name, $prefix, $config);
 

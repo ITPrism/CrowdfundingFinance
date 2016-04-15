@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 
 jimport('Crowdfunding.init');
-jimport('CrowdfundingFinance.init');
+jimport('Crowdfundingfinance.init');
 
 /**
  * Crowdfunding Payout Options Plugin
@@ -23,7 +23,7 @@ class plgCrowdfundingPayoutOptions extends JPlugin
 {
     protected $autoloadLanguage = true;
 
-    protected $version = '2.2';
+    protected $version = '2.3';
 
     /**
      * @var Prism\Log\Log
@@ -98,7 +98,7 @@ class plgCrowdfundingPayoutOptions extends JPlugin
             $activeTab = 'stripe';
         }
 
-        $payout = new CrowdfundingFinance\Payout(JFactory::getDbo());
+        $payout = new Crowdfundingfinance\Payout(JFactory::getDbo());
         $payout->setSecretKey($this->app->get('secret'));
         $payout->load(array('project_id' => $item->id));
 
@@ -110,19 +110,18 @@ class plgCrowdfundingPayoutOptions extends JPlugin
 
         // Check if Stripe connected.
         if ($this->params->get('display_stripe', 0)) {
-
             $stripeWarning   = null;
             $stripeButton   = array();
 
             $cfFinanceParams = JComponentHelper::getParams('com_crowdfundingfinance');
 
             // Get keys.
-            $apiKeys = CrowdfundingFinance\Stripe\Helper::getKeys($cfFinanceParams);
+            $apiKeys = Crowdfundingfinance\Stripe\Helper::getKeys($cfFinanceParams);
             if (!$apiKeys['client_id']) {
                 $stripeWarning = JText::_('PLG_CROWDFUNDING_PAYOUTOPTIONS_ERROR_STRIPE_NOT_CONFIGURED');
             }
 
-            $token = CrowdfundingFinance\Stripe\Helper::getPayoutAccessToken($apiKeys, $payout, $cfFinanceParams->get('stripe_expiration_period', 7));
+            $token = Crowdfundingfinance\Stripe\Helper::getPayoutAccessToken($apiKeys, $payout, $cfFinanceParams->get('stripe_expiration_period', 7));
 
             // Generate state HASH and use it as a session key that contains redirect URL.
             $state       = Prism\Utilities\StringHelper::generateRandomString(32);
@@ -231,7 +230,7 @@ class plgCrowdfundingPayoutOptions extends JPlugin
 
         $cfFinanceParams = JComponentHelper::getParams('com_crowdfundingfinance');
 
-        $apiKeys = CrowdfundingFinance\Stripe\Helper::getKeys($cfFinanceParams);
+        $apiKeys = Crowdfundingfinance\Stripe\Helper::getKeys($cfFinanceParams);
         if (!$apiKeys['client_id'] or !$apiKeys['secret_key']) {
             $errorOutput['message'] = JText::_($this->textPrefix . '_ERROR_CONFIGURATION');
             return $errorOutput;
@@ -263,7 +262,7 @@ class plgCrowdfundingPayoutOptions extends JPlugin
             )
         ));
         
-        $payout = new CrowdfundingFinance\Payout(JFactory::getDbo());
+        $payout = new Crowdfundingfinance\Payout(JFactory::getDbo());
         $payout->setSecretKey($this->app->get('secret'));
 
         $payout->load(array('project_id' => (int)$stateData['project_id']));
@@ -345,13 +344,13 @@ class plgCrowdfundingPayoutOptions extends JPlugin
 
         $cfFinanceParams = JComponentHelper::getParams('com_crowdfundingfinance');
 
-        $apiKeys = CrowdfundingFinance\Stripe\Helper::getKeys($cfFinanceParams);
+        $apiKeys = Crowdfundingfinance\Stripe\Helper::getKeys($cfFinanceParams);
         if (!$apiKeys['client_id'] or !$apiKeys['secret_key']) {
             $errorOutput['message'] = JText::_($this->textPrefix . '_ERROR_CONFIGURATION');
             return $errorOutput;
         }
 
-        $payout = new CrowdfundingFinance\Payout(JFactory::getDbo());
+        $payout = new Crowdfundingfinance\Payout(JFactory::getDbo());
         $payout->setSecretKey($this->app->get('secret'));
 
         $payout->load(array('project_id' => (int)$stateData['project_id']));
@@ -369,7 +368,7 @@ class plgCrowdfundingPayoutOptions extends JPlugin
             return $errorOutput;
         }
 
-        CrowdfundingFinance\Stripe\Helper::deauthorize($apiKeys, $stripeData->get('stripeconnect.'.$alias.'.account_id'));
+        Crowdfundingfinance\Stripe\Helper::deauthorize($apiKeys, $stripeData->get('stripeconnect.'.$alias.'.account_id'));
 
         $stripeData->set('stripeconnect.'.$alias.'.access_token', '');
         $stripeData->set('stripeconnect.'.$alias.'.refresh_token', '');

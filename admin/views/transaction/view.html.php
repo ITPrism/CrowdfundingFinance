@@ -1,18 +1,17 @@
 <?php
 /**
- * @package      CrowdfundingFinance
+ * @package      Crowdfundingfinance
  * @subpackage   Components
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 // no direct access
 defined('_JEXEC') or die;
 
-class CrowdfundingFinanceViewTransaction extends JViewLegacy
+class CrowdfundingfinanceViewTransaction extends JViewLegacy
 {
-
     /**
      * @var JDocumentHtml
      */
@@ -26,23 +25,19 @@ class CrowdfundingFinanceViewTransaction extends JViewLegacy
 
     protected $documentTitle;
     protected $option;
-
-    public function __construct($config)
-    {
-        parent::__construct($config);
-        $this->option = JFactory::getApplication()->input->get("option");
-
-        $this->layoutsBasePath = JPath::clean(CROWDFUNDING_PATH_COMPONENT_ADMINISTRATOR . DIRECTORY_SEPARATOR . "layouts");
-    }
+    protected $layoutsBasePath;
 
     public function display($tpl = null)
     {
+        $this->option          = JFactory::getApplication()->input->get('option');
+        $this->layoutsBasePath = JPath::clean(CROWDFUNDING_PATH_COMPONENT_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'layouts');
+        
         $this->state = $this->get('State');
         $this->item  = $this->get('Item');
         $this->form  = $this->get('Form');
 
         $this->extraData = $this->item->extra_data;
-        if (!empty($this->extraData)) {
+        if ($this->extraData !== '') {
             $this->extraData = json_decode($this->extraData, true);
         }
 

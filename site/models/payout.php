@@ -3,7 +3,7 @@
  * @package      CrowdfundingFinance
  * @subpackage   Component
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -83,39 +83,38 @@ class CrowdfundingFinanceModelPayout extends JModelForm
     public function save($data)
     {
         // Set the value of the data to NULL if it is empty.
-        foreach ($data as &$value) {
-            if (empty($value)) {
-                $value = null;
+        foreach ($data as $key => $value) {
+            if (!$value) {
+                unset($data[$key]);
             }
         }
 
-
-        $projectId       = JArrayHelper::getValue($data, "id");
-        $paypalEmail     = JArrayHelper::getValue($data, "paypal_email");
-        $paypalFirstName = JArrayHelper::getValue($data, "paypal_first_name");
-        $paypalLastName  = JArrayHelper::getValue($data, "paypal_last_name");
-        $iban            = JArrayHelper::getValue($data, "iban");
-        $bankAccount     = JArrayHelper::getValue($data, "bank_account");
+        $projectId       = Joomla\Utilities\ArrayHelper::getValue($data, 'id', 0, 'int');
+        $paypalEmail     = Joomla\Utilities\ArrayHelper::getValue($data, 'paypal_email');
+        $paypalFirstName = Joomla\Utilities\ArrayHelper::getValue($data, 'paypal_first_name');
+        $paypalLastName  = Joomla\Utilities\ArrayHelper::getValue($data, 'paypal_last_name');
+        $iban            = Joomla\Utilities\ArrayHelper::getValue($data, 'iban');
+        $bankAccount     = Joomla\Utilities\ArrayHelper::getValue($data, 'bank_account');
 
         // Load a record from the database
         $row = $this->getTable();
-        $row->load($projectId);
+        $row->load(array('project_id' => $projectId));
 
         // Create a new record if it does not exist.
-        if (!$row->get("id")) {
+        if (!$row->get('id')) {
             $this->createRecord($projectId);
-            $row->load($projectId);
+            $row->load(array('project_id' => $projectId));
         }
 
-        $row->set("paypal_email", $paypalEmail);
-        $row->set("paypal_first_name", $paypalFirstName);
-        $row->set("paypal_last_name", $paypalLastName);
-        $row->set("iban", $iban);
-        $row->set("bank_account", $bankAccount);
+        $row->set('paypal_email', $paypalEmail);
+        $row->set('paypal_first_name', $paypalFirstName);
+        $row->set('paypal_last_name', $paypalLastName);
+        $row->set('iban', $iban);
+        $row->set('bank_account', $bankAccount);
 
         $row->store(true);
 
-        return $row->get("id");
+        return $row->get('id');
     }
 
     /**
@@ -126,15 +125,15 @@ class CrowdfundingFinanceModelPayout extends JModelForm
     protected function createRecord($projectId)
     {
         if (!$projectId) {
-            throw new InvalidArgumentException(JText::_("COM_CROWDFUNDING_ERROR_INVALID_PROJECT"));
+            throw new InvalidArgumentException(JText::_('COM_CROWDFUNDING_ERROR_INVALID_PROJECT'));
         }
 
         $db     = $this->getDbo();
         $query  = $db->getQuery(true);
 
         $query
-            ->insert($db->quoteName("#__cffinance_payouts"))
-            ->set($db->quoteName("id") ." = ".(int)$projectId);
+            ->insert($db->quoteName('#__cffinance_payouts'))
+            ->set($db->quoteName('id') .' = '.(int)$projectId);
 
         $db->setQuery($query);
         $db->execute();

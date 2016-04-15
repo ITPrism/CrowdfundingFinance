@@ -1,9 +1,9 @@
 <?php
 /**
- * @package      CrowdfundingFinance
+ * @package      Crowdfundingfinance
  * @subpackage   Components
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -15,7 +15,7 @@ JLoader::register('CrowdfundingModelTransactions', CROWDFUNDING_PATH_COMPONENT_A
 /**
  * Get a list of items
  */
-class CrowdfundingFinanceModelTransactions extends CrowdfundingModelTransactions
+class CrowdfundingfinanceModelTransactions extends CrowdfundingModelTransactions
 {
 
 }

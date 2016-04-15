@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="3.4" type="plugin" group="crowdfunding" method="upgrade">
+<extension version="3.5" type="plugin" group="crowdfunding" method="upgrade">
     <name>PLG_CROWDFUNDING_PAYOUTOPTIONS</name>
     <author>Todor Iliev</author>
-    <copyright>Copyright (C) 2015 Todor Iliev ( ITPrism.com ). All rights reserved.</copyright>
-    <license>http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPL</license>
+    <copyright>Copyright (C) 2016 Todor Iliev ( ITPrism.com ). All rights reserved.</copyright>
+    <license>http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3</license>
     <authorEmail>todor@itprism.com</authorEmail>
     <authorUrl>http://itprism.com</authorUrl>
-    <version>2.2</version>
-    <creationDate>31 October, 2015</creationDate>
+    <version>2.3</version>
+    <creationDate>15 April, 2016</creationDate>
     <description><![CDATA[
 	<p>Crowdfunding Payout Options is a plug-in that displays a form where the project owner will use to set a data about where he would like to receive the amount.</p>
 	<p><a href="http://itprism.com/" target="_blank">Subscribe for the newsletter</a> to receive information about updates and new ITPrism extensions.</p>

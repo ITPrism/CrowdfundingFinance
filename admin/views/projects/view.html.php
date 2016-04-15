@@ -1,16 +1,16 @@
 <?php
 /**
- * @package      CrowdfundingFinance
+ * @package      Crowdfundingfinance
  * @subpackage   Components
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 // no direct access
 defined('_JEXEC') or die;
 
-class CrowdfundingFinanceViewProjects extends JViewLegacy
+class CrowdfundingfinanceViewProjects extends JViewLegacy
 {
     /**
      * @var JDocumentHtml
@@ -103,9 +103,7 @@ class CrowdfundingFinanceViewProjects extends JViewLegacy
             'a.funding_end'   => JText::_('COM_CROWDFUNDINGFINANCE_END_DATE'),
             'a.approved'      => JText::_('COM_CROWDFUNDINGFINANCE_APPROVED'),
             'a.id'            => JText::_('JGRID_HEADING_ID')
-
         );
-
     }
 
     /**
@@ -114,7 +112,7 @@ class CrowdfundingFinanceViewProjects extends JViewLegacy
     protected function addSidebar()
     {
         // Add submenu
-        CrowdfundingFinanceHelper::addSubmenu($this->getName());
+        CrowdfundingfinanceHelper::addSubmenu($this->getName());
         
         // Prepare options
         $approvedOptions = array(
@@ -194,6 +192,6 @@ class CrowdfundingFinanceViewProjects extends JViewLegacy
 
         JHtml::_('formbehavior.chosen', 'select');
 
-        JHtml::_('prism.ui.joomlaList');
+        JHtml::_('Prism.ui.joomlaList');
     }
 }

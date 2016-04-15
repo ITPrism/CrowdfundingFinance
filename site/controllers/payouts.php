@@ -3,7 +3,7 @@
  * @package      CrowdfundingFinance
  * @subpackage   Payouts
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -103,7 +103,6 @@ class CrowdfundingFinanceControllerPayouts extends JControllerLegacy
 
         // Trigger the event
         try {
-
             $context = 'com_crowdfundingfinance.payouts.'.$task.'.' . JString::strtolower($paymentService);
 
             // Import Crowdfunding Payment Plugins
@@ -124,13 +123,10 @@ class CrowdfundingFinanceControllerPayouts extends JControllerLegacy
             }
 
         } catch (UnexpectedValueException $e) {
-
             $this->setMessage($e->getMessage(), 'notice');
             $this->setRedirect(JRoute::_(CrowdfundingHelperRoute::getDiscoverRoute(), false));
             return;
-
         } catch (Exception $e) {
-
             // Store log data in the database
             JLog::add($e->getMessage());
 

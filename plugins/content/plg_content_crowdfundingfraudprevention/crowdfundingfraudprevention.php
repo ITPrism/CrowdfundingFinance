@@ -3,7 +3,7 @@
  * @package      Crowdfunding
  * @subpackage   Plugins
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 
 jimport('Crowdfunding.init');
-jimport('CrowdfundingFinance.init');
+jimport('Crowdfundingfinance.init');
 
 /**
  * This plugin validates data.
@@ -34,7 +34,7 @@ class plgContentCrowdfundingFraudPrevention extends JPlugin
      * It works only on front-end.
      *
      * @param string $context
-     * @param object $item
+     * @param stdClass $item
      * @param Joomla\Registry\Registry $params
      * @param int $state
      *
@@ -77,12 +77,10 @@ class plgContentCrowdfundingFraudPrevention extends JPlugin
         /** @var  $componentParams Joomla\Registry\Registry */
 
         // Verify the number of campaigns per user at one time.
-
         $allowedActiveCampaigns = (int)$componentParams->get('protection_active_projects');
         if ($allowedActiveCampaigns > 0) {
-
             // Get the number of active projects for a user.
-            $userStatistics = new Crowdfunding\Statistics\User(JFactory::getDbo(), $userId);
+            $userStatistics  = new Crowdfunding\Statistics\User(JFactory::getDbo(), $userId);
             $activeCampaigns = (int)$userStatistics->getNumberOfActiveCampaigns();
 
             // Validate number of active campaigns per user.
@@ -90,14 +88,12 @@ class plgContentCrowdfundingFraudPrevention extends JPlugin
                 $result['message'] = JText::sprintf('PLG_CONTENT_CROWDFUNDINGFRAUDPREVENTION_ERROR_ACTIVE_PROJECTS_D', $allowedActiveCampaigns);
                 return $result;
             }
-
         }
 
         // Verify the number of campaigns per user per year.
 
         $allowedCampaignsPerYear = (int)$componentParams->get('protection_projects_per_year');
         if ($allowedCampaignsPerYear > 0) {
-
             // Get the number of active projects for a user.
             $userStatistics = new Crowdfunding\Statistics\User(JFactory::getDbo(), $userId);
             $numberOfCampaigns = (int)$userStatistics->getNumberOfCampaignsInPeriod();
@@ -107,7 +103,6 @@ class plgContentCrowdfundingFraudPrevention extends JPlugin
                 $result['message'] = JText::sprintf('PLG_CONTENT_CROWDFUNDINGFRAUDPREVENTION_ERROR_PROJECTS_YEAR_D', $allowedCampaignsPerYear);
                 return $result;
             }
-
         }
 
         // Validation completed successfully.

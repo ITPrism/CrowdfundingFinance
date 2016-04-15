@@ -1,9 +1,9 @@
 <?php
 /**
- * @package      CrowdfundingFinance
+ * @package      Crowdfundingfinance
  * @subpackage   Components
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -15,12 +15,12 @@ JLoader::register("CrowdfundingControllerTransactions", CROWDFUNDING_PATH_COMPON
 /**
  * Crowdfunding Finance transactions controller class
  *
- * @package      CrowdfundingFinance
+ * @package      Crowdfundingfinance
  * @subpackage   Components
  */
-class CrowdfundingFinanceControllerTransactions extends CrowdfundingControllerTransactions
+class CrowdfundingfinanceControllerTransactions extends CrowdfundingControllerTransactions
 {
-    public function getModel($name = 'Transaction', $prefix = 'CrowdfundingFinanceModel', $config = array('ignore_request' => true))
+    public function getModel($name = 'Transaction', $prefix = 'CrowdfundingfinanceModel', $config = array('ignore_request' => true))
     {
         $model = parent::getModel($name, $prefix, $config);
 

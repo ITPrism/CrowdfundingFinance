@@ -1,9 +1,9 @@
 <?php
 /**
- * @package      CrowdfundingFinance
+ * @package      Crowdfundingfinance
  * @subpackage   Components
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -17,11 +17,11 @@ JLoader::register("CrowdfundingControllerPayments", CROWDFUNDING_PATH_COMPONENT_
  * This controller provides functionality
  * that helps to payment plugins to prepare their payment data.
  *
- * @package        CrowdfundingFinance
+ * @package        Crowdfundingfinance
  * @subpackage     Payments
  *
  */
-class CrowdfundingFinanceControllerPayments extends CrowdfundingControllerPayments
+class CrowdfundingfinanceControllerPayments extends CrowdfundingControllerPayments
 {
     protected $text_prefix = "COM_CROWDFUNDINGFINANCE";
 
