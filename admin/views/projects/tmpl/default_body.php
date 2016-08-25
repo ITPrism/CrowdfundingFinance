@@ -38,9 +38,9 @@ defined('_JEXEC') or die;
         <td class="center hidden-phone"><?php echo $this->amount->setValue($item->goal)->formatCurrency(); ?></td>
         <td class="center hidden-phone"><?php echo $this->amount->setValue($item->funded)->formatCurrency(); ?></td>
         <td class="center hidden-phone"><?php echo JHtml::_('crowdfunding.percent', $item->funded_percents); ?></td>
-        <td class="center hidden-phone"><?php echo JHtml::_('crowdfunding.date', $item->funding_start, JText::_('DATE_FORMAT_LC3')); ?></td>
-        <td class="center hidden-phone"><?php echo JHtml::_('crowdfunding.duration', $item->funding_end, $item->funding_days, JText::_('DATE_FORMAT_LC3')); ?></td>
-        <td class="center hidden-phone"><?php echo JHtml::_('date', $item->created, JText::_('DATE_FORMAT_LC3')); ?></td>
+        <td class="center hidden-phone"><?php echo JHtml::_('crowdfunding.date', $item->funding_start, $this->cfParams->get('date_format_views', JText::_('DATE_FORMAT_LC3'))); ?></td>
+        <td class="center hidden-phone"><?php echo JHtml::_('crowdfunding.duration', $item->funding_end, $item->funding_days, $this->cfParams->get('date_format_views', JText::_('DATE_FORMAT_LC3'))); ?></td>
+        <td class="center hidden-phone"><?php echo JHtml::_('date', $item->created, $this->cfParams->get('date_format_views', JText::_('DATE_FORMAT_LC3'))); ?></td>
         <td class="center hidden-phone"><?php echo $item->category; ?></td>
         <td class="center hidden-phone"><?php echo $this->escape($item->type); ?></td>
         <td class="center hidden-phone"><?php echo $item->id; ?></td>

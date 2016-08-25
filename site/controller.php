@@ -29,6 +29,8 @@ class CrowdfundingFinanceController extends JControllerLegacy
         $viewName = $this->input->getCmd('view', 'discover');
         $this->input->set('view', $viewName);
 
+        JHtml::_('Prism.ui.styles');
+
         $safeurlparams = array(
             'id'               => 'INT',
             'limit'            => 'INT',
@@ -39,6 +41,5 @@ class CrowdfundingFinanceController extends JControllerLegacy
         );
 
         return parent::display($cachable, $safeurlparams);
-
     }
 }

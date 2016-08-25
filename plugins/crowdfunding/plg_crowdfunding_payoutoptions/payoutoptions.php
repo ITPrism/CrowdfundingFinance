@@ -85,7 +85,7 @@ class plgCrowdfundingPayoutOptions extends JPlugin
         }
 
         // A flag that shows the options are active.
-        if (!$this->params->get('display_paypal', 0) and !$this->params->get('display_banktransfer', 0)) {
+        if (!$this->params->get('display_paypal', 0) and !$this->params->get('display_banktransfer', 0) and !$this->params->get('display_stripe', 0)) {
             return '';
         }
 

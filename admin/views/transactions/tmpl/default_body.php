@@ -21,7 +21,7 @@ defined('_JEXEC') or die;
         'class' => 'width-100px'
     );
     ?>
-    <tr class="row<?php echo $i % 2; ?>">
+    <tr class="row<?php echo $i % 2; ?> <?php echo JHtml::_('crowdfundingbackend.transactionColor', $item->txn_status); ?>">
         <td class="center hidden-phone">
             <?php echo JHtml::_('grid.id', $i, $item->id); ?>
         </td>

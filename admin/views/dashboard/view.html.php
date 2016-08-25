@@ -51,9 +51,8 @@ class CrowdfundingfinanceViewDashboard extends JViewLegacy
             }
         }
 
+        $this->cfParams = JComponentHelper::getParams('com_crowdfunding');
         /** @var  $cfParams Joomla\Registry\Registry */
-        $cfParams       = JComponentHelper::getParams('com_crowdfunding');
-        $this->cfParams = $cfParams;
 
         // Get latest transactions.
         $this->latest = new Crowdfunding\Statistics\Transactions\Latest(JFactory::getDbo());

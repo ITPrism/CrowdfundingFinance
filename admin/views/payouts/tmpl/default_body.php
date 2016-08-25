@@ -17,10 +17,12 @@ defined('_JEXEC') or die;
         <td class="center hidden-phone">
             <?php echo JHtml::_('grid.id', $i, $item->id); ?>
         </td>
-        <td class="btn-group">
+        <td>
+            <div class="btn-group">
             <?php echo JHtml::_('crowdfundingfinancebackend.published', $i, $item->published, 'projects.'); ?>
             <?php echo JHtml::_('crowdfundingfinancebackend.featured', $i, $item->featured); ?>
             <?php echo JHtml::_('crowdfundingfinancebackend.approved', $i, $item->approved); ?>
+            </div>
         </td>
         <td>
             <a href="<?php echo JRoute::_('index.php?option=com_crowdfundingfinance&view=payout&layout=edit&id=' . (int)$item->id); ?>">
@@ -47,15 +49,15 @@ defined('_JEXEC') or die;
         <td class="hidden-phone">
             <div>
                 <strong><?php echo JText::_('COM_CROWDFUNDINGFINANCE_START_DATE'); ?></strong> :
-                <?php echo JHtml::_('crowdfunding.date', $item->funding_start, JText::_('DATE_FORMAT_LC3')); ?>
+                <?php echo JHtml::_('crowdfunding.date', $item->funding_start, $this->cfParams->get('date_format_views', JText::_('DATE_FORMAT_LC3'))); ?>
             </div>
             <div>
                 <strong><?php echo JText::_('COM_CROWDFUNDINGFINANCE_END_DATE'); ?></strong> :
-                <?php echo JHtml::_('crowdfunding.duration', $item->funding_end, $item->funding_days, JText::_('DATE_FORMAT_LC3')); ?>
+                <?php echo JHtml::_('crowdfunding.duration', $item->funding_end, $item->funding_days, $this->cfParams->get('date_format_views', JText::_('DATE_FORMAT_LC3'))); ?>
             </div>
             <div>
                 <strong><?php echo JText::_('COM_CROWDFUNDINGFINANCE_CREATED'); ?></strong> :
-                <?php echo JHtml::_('date', $item->created, JText::_('DATE_FORMAT_LC3')); ?>
+                <?php echo JHtml::_('date', $item->created, $this->cfParams->get('date_format_views', JText::_('DATE_FORMAT_LC3'))); ?>
             </div>
         </td>
         <td class="hidden-phone">

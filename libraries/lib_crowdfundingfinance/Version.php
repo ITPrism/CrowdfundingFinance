@@ -38,7 +38,7 @@ class Version
      *
      * @var integer
      */
-    public $devLevel = '3';
+    public $devLevel = '3.1';
 
     /**
      * Release Type
@@ -59,7 +59,7 @@ class Version
      *
      * @var string
      */
-    public $releaseDate = '15 April, 2016';
+    public $releaseDate = '24 August, 2016';
 
     /**
      * License
@@ -80,7 +80,7 @@ class Version
      *
      * @var string
      */
-    public $url = '<a href="#" target="_blank">Crowdfunding Finance</a>';
+    public $url = '<a href="http://itprism.com/help/95-crowdfunding-documentation-faq?start=1#crowdfunding-finance" target="_blank">Crowdfunding Finance</a>';
 
     /**
      * Backlink

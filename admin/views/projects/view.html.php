@@ -53,9 +53,8 @@ class CrowdfundingfinanceViewProjects extends JViewLegacy
         $this->pagination = $this->get('Pagination');
 
         // Get parameters of com_crowdfunding.
+        $this->cfParams = JComponentHelper::getParams('com_crowdfunding');
         /** @var  $cParams Joomla\Registry\Registry */
-        $cParams        = JComponentHelper::getParams('com_crowdfunding');
-        $this->cfParams = $cParams;
 
         $currency = Crowdfunding\Currency::getInstance(JFactory::getDbo(), $this->cfParams->get('project_currency'));
 

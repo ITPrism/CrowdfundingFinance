@@ -49,7 +49,7 @@ defined('_JEXEC') or die;
                                     <?php echo $this->amount->setValue($this->latest[$i]['txn_amount'])->formatCurrency(); ?>
                                 </td>
                                 <td class="center hidden-phone">
-                                    <?php echo JHtml::_('date', $this->latest[$i]['txn_date'], JText::_('DATE_FORMAT_LC2')); ?>
+                                    <?php echo JHtml::_('date', $this->latest[$i]['txn_date'], $this->cfParams->get('date_format_views', JText::_('DATE_FORMAT_LC3'))); ?>
                                 </td>
                             </tr>
                         <?php } ?>

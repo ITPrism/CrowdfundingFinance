@@ -30,16 +30,16 @@ $doc->addScript('plugins/crowdfunding/payoutoptions/js/script.js?v=' . rawurlenc
             <?php } ?>
 
             <?php if($this->params->get('display_banktransfer', 0)) { ?>
-            <li role="presentation">
-                <a href="#banktransfer" aria-controls="banktransfer" role="tab" data-toggle="tab" <?php echo ('banktransfer' === $activeTab) ? 'class="active"' : '';?>>
+            <li role="presentation" <?php echo ('banktransfer' === $activeTab) ? 'class="active"' : '';?>>
+                <a href="#banktransfer" aria-controls="banktransfer" role="tab" data-toggle="tab">
                     <?php echo JText::_('PLG_CROWDFUNDING_PAYOUTOPTIONS_BANKTRANSFER'); ?>
                 </a>
             </li>
             <?php } ?>
 
             <?php if($this->params->get('display_stripe', 0)) { ?>
-                <li role="presentation">
-                    <a href="#stripe" aria-controls="stripe" role="tab" data-toggle="tab" <?php echo ('stripe' === $activeTab) ? 'class="active"' : '';?>>
+                <li role="presentation" <?php echo ('stripe' === $activeTab) ? 'class="active"' : '';?>>
+                    <a href="#stripe" aria-controls="stripe" role="tab" data-toggle="tab">
                         <?php echo JText::_('PLG_CROWDFUNDING_PAYOUTOPTIONS_STRIPE'); ?>
                     </a>
                 </li>

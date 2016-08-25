@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="crowdfundingfinance" default="build" basedir=".">
-	<description>CrowdFunding Finance PRO Ant Build File</description>
+	<description>CrowdFunding Finance Ant Build File</description>
 
 	<!-- load variables from config file -->
-	<property name="cfg.configFile" location="antconfig_j3.txt" />
+	<property name="cfg.configFile" location="antconfig.txt" />
 	<loadproperties srcfile="${cfg.configFile}" />
 
 	<!-- auto values but should be checked -->

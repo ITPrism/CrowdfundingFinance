@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="3.5" type="plugin" group="content" method="upgrade">
+<extension version="3.6" type="plugin" group="content" method="upgrade">
     <name>PLG_CONTENT_CROWDFUNDINGFRAUDPREVENTION</name>
     <author>Todor Iliev</author>
     <copyright>Copyright (C) 2016 Todor Iliev ( ITPrism.com ). All rights reserved.</copyright>
     <license>http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPLv3</license>
     <authorEmail>todor@itprism.com</authorEmail>
     <authorUrl>http://itprism.com</authorUrl>
-    <version>2.3</version>
-    <creationDate>15 April, 2016</creationDate>
+    <version>2.3.1</version>
+    <creationDate>24 August, 2016</creationDate>
     <description><![CDATA[
     <p>Crowdfunding - Fraud Prevention is a plug-in that makes some verifications during the process of project creation to prevent frauds and money laundering..</p>
     <p><a href="http://itprism.com/" target="_blank">Subscribe for the newsletter</a> to receive information about updates and new ITPrism extensions.</p>
