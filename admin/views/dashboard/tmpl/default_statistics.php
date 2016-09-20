@@ -46,7 +46,7 @@ defined('_JEXEC') or die;
                                     </a>
                                 </td>
                                 <td class="center">
-                                    <?php echo $this->amount->setValue($this->latest[$i]['txn_amount'])->formatCurrency(); ?>
+                                    <?php echo $this->money->setAmount($this->latest[$i]['txn_amount'])->formatCurrency(); ?>
                                 </td>
                                 <td class="center hidden-phone">
                                     <?php echo JHtml::_('date', $this->latest[$i]['txn_date'], $this->cfParams->get('date_format_views', JText::_('DATE_FORMAT_LC3'))); ?>
@@ -78,7 +78,7 @@ defined('_JEXEC') or die;
                         </tr>
                         <tr>
                             <th><?php echo JText::_('COM_CROWDFUNDINGFINANCE_TOTAL_AMOUNT'); ?></th>
-                            <td><?php echo $this->amount->setValue($this->totalAmount)->formatCurrency(); ?></td>
+                            <td><?php echo $this->money->setAmount($this->totalAmount)->formatCurrency(); ?></td>
                         </tr>
                         </tbody>
                     </table>

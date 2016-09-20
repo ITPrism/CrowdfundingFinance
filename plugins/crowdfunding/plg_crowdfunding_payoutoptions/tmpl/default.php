@@ -3,7 +3,7 @@
  * @package      CrowdfundingPayoutOptions
  * @subpackage   Plugins
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -13,13 +13,10 @@ defined('_JEXEC') or die;
 $doc->addScript('plugins/crowdfunding/payoutoptions/js/script.js?v=' . rawurlencode($this->version));
 ?>
 <div class="panel panel-default">
-
     <div class="panel-heading">
         <h4><?php echo JText::_('PLG_CROWDFUNDING_PAYOUTOPTIONS_PAYOUT_OPTIONS');?></h4>
     </div>
-
     <div class="panel-body">
-
         <ul class="nav nav-tabs" role="tablist">
             <?php if($this->params->get('display_paypal', 0)) { ?>
             <li role="presentation" <?php echo ('paypal' === $activeTab) ? 'class="active"' : '';?> >
@@ -47,7 +44,6 @@ $doc->addScript('plugins/crowdfunding/payoutoptions/js/script.js?v=' . rawurlenc
         </ul>
 
         <form action="<?php echo JRoute::_('index.php?option=com_crowdfundingfinance'); ?>" method="post" id="js-cfpayoutoptions-form" autocomplete="off">
-
             <div class="tab-content">
             <?php if($this->params->get('display_paypal', 0)) { ?>
                 <div role="tabpanel" class="tab-pane <?php echo ('paypal' === $activeTab) ? 'active' : '';?>" id="paypal">
@@ -76,7 +72,7 @@ $doc->addScript('plugins/crowdfunding/payoutoptions/js/script.js?v=' . rawurlenc
                         <?php echo JText::_('PLG_CROWDFUNDING_PAYOUTOPTIONS_PAYPAL_INFORMATION');?>
                     </h5>
 
-                    <p class="text-justify"><?php echo JText::_('PLG_CROWDFUNDING_PAYOUTOPTIONS_NOTE_PAYPAL_ACCOUNT');?></p>
+                    <p><?php echo JText::_('PLG_CROWDFUNDING_PAYOUTOPTIONS_NOTE_PAYPAL_ACCOUNT');?></p>
 
                     <?php if(!$this->params->get('paypal_requirements_link')) { ?>
                     <p><?php echo JText::_('PLG_CROWDFUNDING_PAYOUTOPTIONS_NOTE_PAYPAL_REQUIREMENTS');?></p>
@@ -115,7 +111,7 @@ $doc->addScript('plugins/crowdfunding/payoutoptions/js/script.js?v=' . rawurlenc
                                     <?php echo JText::_('PLG_CROWDFUNDING_PAYOUTOPTIONS_BANKTRANSFER_INFORMATION');?>
                                 </h5>
 
-                                <p class="text-justify"><?php echo JText::_('PLG_CROWDFUNDING_PAYOUTOPTIONS_NOTE_BANKTRANSFER_ACCOUNT');?></p>
+                                <p><?php echo JText::_('PLG_CROWDFUNDING_PAYOUTOPTIONS_NOTE_BANKTRANSFER_ACCOUNT');?></p>
 
                                 <?php if (!$this->params->get('banktransfer_requirements_link')) { ?>
                                     <p><?php echo JText::_('PLG_CROWDFUNDING_PAYOUTOPTIONS_NOTE_BANKTRANSFER_REQUIREMENTS');?></p>
@@ -149,7 +145,7 @@ $doc->addScript('plugins/crowdfunding/payoutoptions/js/script.js?v=' . rawurlenc
                                     <?php echo JText::_('PLG_CROWDFUNDING_PAYOUTOPTIONS_STRIPE_INFORMATION');?>
                                 </h5>
 
-                                <p class="text-justify"><?php echo JText::_('PLG_CROWDFUNDING_PAYOUTOPTIONS_NOTE_STRIPE_ACCOUNT');?></p>
+                                <p><?php echo JText::_('PLG_CROWDFUNDING_PAYOUTOPTIONS_NOTE_STRIPE_ACCOUNT');?></p>
 
                                 <?php if (!$this->params->get('stripe_requirements_link')) { ?>
                                     <p><?php echo JText::_('PLG_CROWDFUNDING_PAYOUTOPTIONS_NOTE_STRIPE_REQUIREMENTS');?></p>
@@ -181,8 +177,5 @@ $doc->addScript('plugins/crowdfunding/payoutoptions/js/script.js?v=' . rawurlenc
             <input type="hidden" name="format" value="raw"/>
             <input type="hidden" name="project_id" value="<?php echo (int)$item->id; ?>"/>
         </form>
-
     </div>
-
 </div>
-

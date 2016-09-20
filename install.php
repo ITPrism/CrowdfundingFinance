@@ -66,6 +66,9 @@ class pkg_crowdfundingfinanceInstallerScript
      * @param string $type
      * @param string $parent
      *
+     * @throws \UnexpectedValueException
+     * @throws \InvalidArgumentException
+     *
      * @return void
      */
     public function postflight($type, $parent)
@@ -92,7 +95,7 @@ class pkg_crowdfundingfinanceInstallerScript
         // Display result about verification for GD library
         $title = JText::_('COM_CROWDFUNDINGFINANCE_GD_LIBRARY');
         $info  = '';
-        if (!extension_loaded('gd') and function_exists('gd_info')) {
+        if (!extension_loaded('gd') and !function_exists('gd_info')) {
             $result = array('type' => 'important', 'text' => JText::_('COM_CROWDFUNDINGFINANCE_WARNING'));
         } else {
             $result = array('type' => 'success', 'text' => JText::_('JON'));
@@ -118,6 +121,17 @@ class pkg_crowdfundingfinanceInstallerScript
             $result = array('type' => 'important', 'text' => JText::_('JON'));
         } else {
             $result = array('type' => 'success', 'text' => JText::_('JOFF'));
+        }
+        CrowdfundingfinanceInstallHelper::addRow($title, $result, $info);
+
+        // Display result about verification PHP Intl
+        $title = JText::_('COM_CROWDFUNDINGFINANCE_PHPINTL');
+        $info  = '';
+        if (!extension_loaded('intl')) {
+            $info   = JText::_('COM_CROWDFUNDINGFINANCE_PHPINTL_INFO');
+            $result = array('type' => 'important', 'text' => JText::_('JOFF'));
+        } else {
+            $result = array('type' => 'success', 'text' => JText::_('JON'));
         }
         CrowdfundingfinanceInstallHelper::addRow($title, $result, $info);
 
@@ -162,7 +176,7 @@ class pkg_crowdfundingfinanceInstallerScript
                 }
 
             } else {
-                $title  = JText::_('COM_CROWDFUNDING_PRISM_LIBRARY');
+                $title  = JText::_('COM_CROWDFUNDINGFINANCE_PRISM_LIBRARY');
                 $result = array('type' => 'success', 'text' => $text);
             }
         }
@@ -172,9 +186,21 @@ class pkg_crowdfundingfinanceInstallerScript
 
         CrowdfundingfinanceInstallHelper::addRowHeading(JText::_('COM_CROWDFUNDINGFINANCE_INSTALLED_EXTENSIONS'));
 
-        // Crowdfunding Library
+        // Crowdfundingfinance Library
         $result = array('type' => 'success', 'text' => JText::_('COM_CROWDFUNDINGFINANCE_INSTALLED'));
         CrowdfundingfinanceInstallHelper::addRow(JText::_('COM_CROWDFUNDINGFINANCE_CROWDFUNDINGFINANCE_LIBRARY'), $result, JText::_('COM_CROWDFUNDINGFINANCE_LIBRARY'));
+
+        // Crowdfunding - Payout Options
+        $result = array('type' => 'success', 'text' => JText::_('COM_CROWDFUNDINGFINANCE_INSTALLED'));
+        CrowdfundingfinanceInstallHelper::addRow(JText::_('COM_CROWDFUNDINGFINANCE_CROWDFUNDING_PAYOUT_OPTIONS'), $result, JText::_('COM_CROWDFUNDINGFINANCE_PLUGIN'));
+
+        // Content - Crowdfunding Fraud Prevention
+        $result = array('type' => 'success', 'text' => JText::_('COM_CROWDFUNDINGFINANCE_INSTALLED'));
+        CrowdfundingfinanceInstallHelper::addRow(JText::_('COM_CROWDFUNDINGFINANCE_CONTENT_CROUDFUNDINGFRAUDPREVENTION'), $result, JText::_('COM_CROWDFUNDINGFINANCE_PLUGIN'));
+
+        // CrowdfundingPayment - Fraud Prevention
+        $result = array('type' => 'success', 'text' => JText::_('COM_CROWDFUNDINGFINANCE_INSTALLED'));
+        CrowdfundingfinanceInstallHelper::addRow(JText::_('COM_CROWDFUNDINGFINANCE_CROWDFUNDINGPAYMENT_FRAUDPREVENTION'), $result, JText::_('COM_CROWDFUNDINGFINANCE_PLUGIN'));
 
         // End table
         CrowdfundingfinanceInstallHelper::endTable();
@@ -183,6 +209,14 @@ class pkg_crowdfundingfinanceInstallerScript
 
         if (!class_exists('Prism\\Version')) {
             echo JText::_('COM_CROWDFUNDINGFINANCE_MESSAGE_INSTALL_PRISM_LIBRARY');
+        } else {
+            if (class_exists('Crowdfundingfinance\\Version')) {
+                $prismVersion     = new Prism\Version();
+                $componentVersion = new Crowdfundingfinance\Version();
+                if (version_compare($prismVersion->getShortVersion(), $componentVersion->requiredPrismVersion, '<')) {
+                    echo JText::_('COM_CROWDFUNDINGFINANCE_MESSAGE_INSTALL_PRISM_LIBRARY');
+                }
+            }
         }
     }
 }

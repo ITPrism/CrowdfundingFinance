@@ -125,11 +125,11 @@ abstract class JHtmlCrowdfundingFinanceBackend
      *
      * @param array $data
      * @param string $status
-     * @param Crowdfunding\Amount $amount
+     * @param Prism\Money\Money $money
      *
      * @return string
      */
-    public static function transactionStatisticAmount($data, $status, $amount)
+    public static function transactionStatisticAmount($data, $status, $money)
     {
         // Get the data from the aggregated list.
         $data = Joomla\Utilities\ArrayHelper::getValue($data, $status, array(), 'array');
@@ -138,7 +138,7 @@ abstract class JHtmlCrowdfundingFinanceBackend
         $transactions = Joomla\Utilities\ArrayHelper::getValue($data, 'transactions', 0, 'int');
         $projectId = Joomla\Utilities\ArrayHelper::getValue($data, 'project_id', 0, 'int');
 
-        $html[] = $amount->setValue($transactionAmount)->formatCurrency();
+        $html[] = $money->setAmount($transactionAmount)->formatCurrency();
 
         $html[] .= '<a href="'.JRoute::_('index.php?option=com_crowdfundingfinance&view=transactions&filter_search=pid:'.$projectId.'&filter_payment_status='.htmlentities($status, ENT_QUOTES, 'UTF-8')).'">';
         $html[] .= '( '.$transactions.' )';
@@ -170,9 +170,8 @@ abstract class JHtmlCrowdfundingFinanceBackend
                 $html[] = JText::_('COM_CROWDFUNDINGFINANCE_ADDITIONAL_INFORMATION');
                 $html[] = '</a>';
             }
-
         } else {
-            $html[] = "---";
+            $html[] = '---';
         }
 
         return implode("\n", $html);
@@ -182,12 +181,12 @@ abstract class JHtmlCrowdfundingFinanceBackend
      * Calculate the fee that the site owner is going to receive.
      *
      * @param array $data
-     * @param Crowdfunding\Amount $amount
+     * @param Prism\Money\Money $money
      * @param string $title
      *
      * @return string
      */
-    public static function earnedFees($data, $amount, $title)
+    public static function earnedFees($data, $money, $title)
     {
         // Get the data from the aggregated list.
         $completed = Joomla\Utilities\ArrayHelper::getValue($data, 'completed', array(), 'array');
@@ -196,7 +195,7 @@ abstract class JHtmlCrowdfundingFinanceBackend
         $completedAmount = Joomla\Utilities\ArrayHelper::getValue($completed, 'fee_amount', 0, 'float');
         $pendingAmount = Joomla\Utilities\ArrayHelper::getValue($pending, 'fee_amount', 0, 'float');
 
-        $html[] = $amount->setValue($completedAmount + $pendingAmount)->formatCurrency();
+        $html[] = $money->setAmount($completedAmount + $pendingAmount)->formatCurrency();
 
         $html[] = '<a class="btn btn-mini hasTooltip" href="javascript:void(0);" title="'.htmlentities($title, ENT_QUOTES, 'UTF-8').'">';
         $html[] = '<i class="icon-info"></i>';
@@ -209,12 +208,12 @@ abstract class JHtmlCrowdfundingFinanceBackend
      * Calculate the fee that the site owner will not be able to receive.
      *
      * @param array $data
-     * @param Crowdfunding\Amount $amount
+     * @param Prism\Money\Money $money
      * @param string $title
      *
      * @return string
      */
-    public static function missedFees($data, $amount, $title)
+    public static function missedFees($data, $money, $title)
     {
         // Get the data from the aggregated list.
         $canceled = Joomla\Utilities\ArrayHelper::getValue($data, 'canceled', array(), 'array');
@@ -225,7 +224,7 @@ abstract class JHtmlCrowdfundingFinanceBackend
         $failedAmount = Joomla\Utilities\ArrayHelper::getValue($failed, 'fee_amount', 0, 'float');
         $refundedAmount = Joomla\Utilities\ArrayHelper::getValue($refunded, 'fee_amount', 0, 'float');
 
-        $html[] = $amount->setValue($canceledAmount + $failedAmount + $refundedAmount)->formatCurrency();
+        $html[] = $money->setAmount($canceledAmount + $failedAmount + $refundedAmount)->formatCurrency();
 
         $html[] = '<a class="btn btn-mini hasTooltip" href="javascript:void(0);" title="'.htmlentities($title, ENT_QUOTES, 'UTF-8').'">';
         $html[] = '<i class="icon-info"></i>';
@@ -238,12 +237,12 @@ abstract class JHtmlCrowdfundingFinanceBackend
      * Calculate the fee that the site owner is going to receive.
      *
      * @param array $data
-     * @param Crowdfunding\Amount $amount
+     * @param Prism\Money\Money $money
      * @param string $title
      *
      * @return string
      */
-    public static function ownerEarnedAmount($data, $amount, $title)
+    public static function ownerEarnedAmount($data, $money, $title)
     {
         // Get the data from the aggregated list.
         $completed = Joomla\Utilities\ArrayHelper::getValue($data, 'completed', array(), 'array');
@@ -252,7 +251,7 @@ abstract class JHtmlCrowdfundingFinanceBackend
         $completedAmount = Joomla\Utilities\ArrayHelper::getValue($completed, 'amount', 0, 'float');
         $pendingAmount = Joomla\Utilities\ArrayHelper::getValue($pending, 'amount', 0, 'float');
 
-        $html[] = $amount->setValue($completedAmount + $pendingAmount)->formatCurrency();
+        $html[] = $money->setAmount($completedAmount + $pendingAmount)->formatCurrency();
 
         $html[] = '<a class="btn btn-mini hasTooltip" href="javascript:void(0);" title="'.htmlentities($title, ENT_QUOTES, 'UTF-8').'">';
         $html[] = '<i class="icon-info"></i>';
@@ -265,12 +264,12 @@ abstract class JHtmlCrowdfundingFinanceBackend
      * Calculate the fee that the site owner is going to receive.
      *
      * @param array $data
-     * @param Crowdfunding\Amount $amount
+     * @param Prism\Money\Money $money
      * @param string $title
      *
      * @return string
      */
-    public static function ownerMissedAmount($data, $amount, $title)
+    public static function ownerMissedAmount($data, $money, $title)
     {
         // Get the data from the aggregated list.
         $canceled = Joomla\Utilities\ArrayHelper::getValue($data, 'canceled', array(), 'array');
@@ -281,7 +280,7 @@ abstract class JHtmlCrowdfundingFinanceBackend
         $failedAmount = Joomla\Utilities\ArrayHelper::getValue($failed, 'amount', 0, 'float');
         $refundedAmount = Joomla\Utilities\ArrayHelper::getValue($refunded, 'amount', 0, 'float');
 
-        $html[] = $amount->setValue($canceledAmount + $failedAmount + $refundedAmount)->formatCurrency();
+        $html[] = $money->setAmount($canceledAmount + $failedAmount + $refundedAmount)->formatCurrency();
 
         $html[] = '<a class="btn btn-mini hasTooltip" href="javascript:void(0);" title="'.htmlentities($title, ENT_QUOTES, 'UTF-8').'">';
         $html[] = '<i class="icon-info"></i>';

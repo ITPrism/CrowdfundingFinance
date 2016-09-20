@@ -23,13 +23,10 @@ class CrowdfundingfinanceViewPayout extends JViewLegacy
 
     protected $documentTitle;
     protected $option;
-
-    /**
-     * Display the view
-     */
+    
     public function display($tpl = null)
     {
-        $this->option = JFactory::getApplication()->input->get("option");
+        $this->option = JFactory::getApplication()->input->get('option');
 
         $this->state = $this->get('State');
         $this->item  = $this->get('Item');
@@ -81,6 +78,6 @@ class CrowdfundingfinanceViewPayout extends JViewLegacy
 
         JHtml::_('formbehavior.chosen', 'select');
 
-        $this->document->addScript('../media/' . $this->option . '/js/admin/' . JString::strtolower($this->getName()) . '.js');
+        $this->document->addScript('../media/' . $this->option . '/js/admin/' . strtolower($this->getName()) . '.js');
     }
 }

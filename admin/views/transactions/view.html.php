@@ -12,6 +12,8 @@ defined('_JEXEC') or die;
 
 class CrowdfundingfinanceViewTransactions extends JViewLegacy
 {
+    use Crowdfunding\Helper\MoneyHelper;
+
     /**
      * @var JDocumentHtml
      */
@@ -32,7 +34,7 @@ class CrowdfundingfinanceViewTransactions extends JViewLegacy
 
     protected $projectTitle = '';
     protected $currencies;
-    protected $amount;
+    protected $money;
 
     protected $option;
     protected $listOrder;
@@ -41,6 +43,7 @@ class CrowdfundingfinanceViewTransactions extends JViewLegacy
 
     protected $saveOrderingUrl;
     protected $enabledSpecificPlugins;
+    protected $paymentStatuses;
 
     protected $sortFields;
 
@@ -55,8 +58,8 @@ class CrowdfundingfinanceViewTransactions extends JViewLegacy
     
     public function display($tpl = null)
     {
-        $this->option = JFactory::getApplication()->input->get('option');
-        
+        $this->option     = JFactory::getApplication()->input->get('option');
+
         $this->state      = $this->get('State');
         $this->items      = $this->get('Items');
         $this->pagination = $this->get('Pagination');
@@ -75,7 +78,7 @@ class CrowdfundingfinanceViewTransactions extends JViewLegacy
             $this->currencies = new Crowdfunding\Currencies(JFactory::getDbo());
             $this->currencies->load(array('codes' => $currencyCodes));
 
-            $this->amount = new Crowdfunding\Amount($this->cfParams);
+            $this->money      = $this->getMoneyFormatter($this->cfParams);
         }
 
         // Get project title.
@@ -148,11 +151,11 @@ class CrowdfundingfinanceViewTransactions extends JViewLegacy
         );
 
         // Get payment statuses.
-        $paymentStatuses = $filters->getPaymentStatuses();
+        $this->paymentStatuses = $filters->getPaymentStatuses();
         JHtmlSidebar::addFilter(
             JText::_('COM_CROWDFUNDINGFINANCE_SELECT_PAYMENT_STATUS'),
             'filter_payment_status',
-            JHtml::_('select.options', $paymentStatuses, 'value', 'text', $this->state->get('filter.payment_status'), true)
+            JHtml::_('select.options', $this->paymentStatuses, 'value', 'text', $this->state->get('filter.payment_status'), true)
         );
 
         // Get reward states.

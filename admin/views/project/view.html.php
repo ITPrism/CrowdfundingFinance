@@ -12,6 +12,8 @@ defined('_JEXEC') or die;
 
 class CrowdfundingfinanceViewProject extends JViewLegacy
 {
+    use Crowdfunding\Helper\MoneyHelper;
+
     /**
      * @var JDocumentHtml
      */
@@ -32,7 +34,7 @@ class CrowdfundingfinanceViewProject extends JViewLegacy
     protected $stats;
     protected $transactionStatuses;
     protected $payout;
-    protected $amount;
+    protected $money;
     protected $imagesUrl;
 
     protected $documentTitle;
@@ -41,7 +43,7 @@ class CrowdfundingfinanceViewProject extends JViewLegacy
     public function display($tpl = null)
     {
         $this->option = JFactory::getApplication()->input->get('option');
-        
+
         $app    = JFactory::getApplication();
         $itemId = $app->input->getUint('id');
 
@@ -55,18 +57,12 @@ class CrowdfundingfinanceViewProject extends JViewLegacy
         $this->transactionStatuses = $this->stats->getTransactionsStatusStatistics();
         $this->payout = $this->stats->getPayoutStatistics();
 
-        /** @var  $cParams Joomla\Registry\Registry */
-        $cParams        = JComponentHelper::getParams('com_crowdfunding');
-        $this->cfParams = $cParams;
+        $this->cfParams  = JComponentHelper::getParams('com_crowdfunding');
 
         $imagesFolder    = $this->cfParams->get('images_directory', 'images/crowdfunding');
         $this->imagesUrl = JUri::root() . $imagesFolder;
 
-        // Get currency.
-        $currency = Crowdfunding\Currency::getInstance(JFactory::getDbo(), $this->cfParams->get('project_currency'));
-
-        $this->amount = new Crowdfunding\Amount($this->cfParams);
-        $this->amount->setCurrency($currency);
+        $this->money     = $this->getMoneyFormatter($this->cfParams);
 
         // Prepare actions, behaviors, scripts and document
         $this->addToolbar();

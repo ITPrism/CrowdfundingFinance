@@ -12,6 +12,8 @@ defined('_JEXEC') or die;
 
 class CrowdfundingfinanceViewDashboard extends JViewLegacy
 {
+    use Crowdfunding\Helper\MoneyHelper;
+
     /**
      * @var JDocumentHtml
      */
@@ -28,7 +30,7 @@ class CrowdfundingfinanceViewDashboard extends JViewLegacy
     protected $totalProjects;
     protected $totalTransactions;
     protected $totalAmount;
-    protected $amount;
+    protected $money;
     protected $version;
     protected $prismVersion;
     protected $prismVersionLowerMessage;
@@ -63,11 +65,7 @@ class CrowdfundingfinanceViewDashboard extends JViewLegacy
         $this->totalTransactions = $basic->getTotalTransactions();
         $this->totalAmount       = $basic->getTotalAmount();
 
-        // Get currency.
-        $currency = Crowdfunding\Currency::getInstance(JFactory::getDbo(), $this->cfParams->get('project_currency'));
-
-        $this->amount   = new Crowdfunding\Amount($this->cfParams);
-        $this->amount->setCurrency($currency);
+        $this->money             = $this->getMoneyFormatter($this->cfParams);
 
         // Add submenu
         CrowdfundingfinanceHelper::addSubmenu($this->getName());

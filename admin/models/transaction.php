@@ -10,7 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
-JLoader::register("CrowdfundingModelTransaction", CROWDFUNDING_PATH_COMPONENT_ADMINISTRATOR . "/models/transaction.php");
+JLoader::register('CrowdfundingModelTransaction', CROWDFUNDING_PATH_COMPONENT_ADMINISTRATOR . '/models/transaction.php');
 
 class CrowdfundingfinanceModelTransaction extends CrowdfundingModelTransaction
 {

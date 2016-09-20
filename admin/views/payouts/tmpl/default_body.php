@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 ?>
 <?php foreach ($this->items as $i => $item) {
-    $numberOfTransactions = (isset($this->transactions[$item->id])) ? $this->transactions[$item->id]['number'] : 0;
+    $numberOfTransactions = isset($this->transactions[$item->id]) ? $this->transactions[$item->id]['number'] : 0;
     ?>
     <tr class="row<?php echo $i % 2; ?>">
         <td class="center hidden-phone">
@@ -42,8 +42,8 @@ defined('_JEXEC') or die;
             </div>
         </td>
         <td class="hidden-phone">
-            <div class="cf-goal"><?php echo JText::sprintf('COM_CROWDFUNDINGFINANCE_GOAL_S', $this->amount->setValue($item->goal)->formatCurrency()); ?></div>
-            <div class="cf-funded"><?php echo JText::sprintf('COM_CROWDFUNDINGFINANCE_FUNDED_S', $this->amount->setValue($item->funded)->formatCurrency()); ?></div>
+            <div class="cf-goal"><?php echo JText::sprintf('COM_CROWDFUNDINGFINANCE_GOAL_S', $this->money->setAmount($item->goal)->formatCurrency()); ?></div>
+            <div class="cf-funded"><?php echo JText::sprintf('COM_CROWDFUNDINGFINANCE_FUNDED_S', $this->money->setAmount($item->funded)->formatCurrency()); ?></div>
             <div class="cf-percent"><?php echo JText::sprintf('COM_CROWDFUNDINGFINANCE_PERCENT_S', JHtml::_('crowdfunding.percent', $item->funded_percents)); ?></div>
         </td>
         <td class="hidden-phone">

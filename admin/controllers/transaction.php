@@ -10,7 +10,7 @@
 // No direct access
 defined('_JEXEC') or die;
 
-JLoader::register("CrowdfundingControllerTransaction", CROWDFUNDING_PATH_COMPONENT_ADMINISTRATOR . DIRECTORY_SEPARATOR . "controllers" . DIRECTORY_SEPARATOR . "transaction.php");
+JLoader::register('CrowdfundingControllerTransaction', CROWDFUNDING_PATH_COMPONENT_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'transaction.php');
 
 /**
  * Crowdfunding Finance transaction controller class.
@@ -28,7 +28,7 @@ class CrowdfundingfinanceControllerTransaction extends CrowdfundingControllerTra
      * @param    string $prefix The class prefix. Optional.
      * @param    array  $config Configuration array for model. Optional.
      *
-     * @return    object    The model.
+     * @return   CrowdfundingfinanceModelTransaction    The model.
      * @since    1.5
      */
     public function getModel($name = 'Transaction', $prefix = 'CrowdfundingfinanceModel', $config = array('ignore_request' => true))

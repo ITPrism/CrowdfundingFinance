@@ -3,13 +3,14 @@
  * @package         CrowdfundingPayoutOptions
  * @subpackage      Plugins
  * @author          Todor Iliev
- * @copyright       Copyright (C) 2015 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright       Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license         http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPL
  */
 
 // no direct access
 defined('_JEXEC') or die;
 
+jimport('Prism.libs.GuzzleHttp.init');
 jimport('Crowdfunding.init');
 jimport('Crowdfundingfinance.init');
 
@@ -23,7 +24,7 @@ class plgCrowdfundingPayoutOptions extends JPlugin
 {
     protected $autoloadLanguage = true;
 
-    protected $version = '2.3';
+    protected $version = '2.4';
 
     /**
      * @var Prism\Log\Log
@@ -48,7 +49,7 @@ class plgCrowdfundingPayoutOptions extends JPlugin
         $this->log = new Prism\Log\Log();
 
         // Set file adapter.
-        $file = \JPath::clean($this->app->get('log_path') . DIRECTORY_SEPARATOR . 'plg_crowdfunding_payout_options.log');
+        $file = \JPath::clean($this->app->get('log_path') . DIRECTORY_SEPARATOR . 'plg_crowdfunding_payout_options.php');
         $this->log->addAdapter(new Prism\Log\Adapter\File($file));
     }
 
@@ -61,7 +62,7 @@ class plgCrowdfundingPayoutOptions extends JPlugin
      *
      * @return null|string
      */
-    public function onExtrasDisplay($context, &$item, &$params)
+    public function onExtrasDisplay($context, $item, $params)
     {
         if (strcmp('com_crowdfunding.project.extras', $context) !== 0) {
             return null;
@@ -174,7 +175,7 @@ class plgCrowdfundingPayoutOptions extends JPlugin
      *
      * @return null|array
      */
-    public function onPayoutsAuthorize($context, &$params)
+    public function onPayoutsAuthorize($context, $params)
     {
         if (strcmp('com_crowdfundingfinance.payouts.authorize.stripeconnect', $context) !== 0) {
             return null;
@@ -289,7 +290,7 @@ class plgCrowdfundingPayoutOptions extends JPlugin
      *
      * @return null|array
      */
-    public function onPayoutsDeauthorize($context, &$params)
+    public function onPayoutsDeauthorize($context, $params)
     {
         if (strcmp('com_crowdfundingfinance.payouts.deauthorize.stripeconnect', $context) !== 0) {
             return null;

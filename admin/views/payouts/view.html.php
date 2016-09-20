@@ -12,6 +12,8 @@ defined('_JEXEC') or die;
 
 class CrowdfundingfinanceViewPayouts extends JViewLegacy
 {
+    use Crowdfunding\Helper\MoneyHelper;
+
     /**
      * @var JDocumentHtml
      */
@@ -30,7 +32,7 @@ class CrowdfundingfinanceViewPayouts extends JViewLegacy
     protected $items;
     protected $pagination;
 
-    protected $amount;
+    protected $money;
     protected $transactions;
 
     protected $option;
@@ -46,27 +48,19 @@ class CrowdfundingfinanceViewPayouts extends JViewLegacy
 
     public function display($tpl = null)
     {
-        $this->option = JFactory::getApplication()->input->get('option');
-        
+        $this->option     = JFactory::getApplication()->input->get('option');
+
         $this->state      = $this->get('State');
         $this->items      = $this->get('Items');
         $this->pagination = $this->get('Pagination');
 
         // Get parameters of com_crowdfunding.
-        /** @var  $cParams Joomla\Registry\Registry */
-        $cParams        = JComponentHelper::getParams('com_crowdfunding');
-        $this->cfParams = $cParams;
+        $this->cfParams     = JComponentHelper::getParams('com_crowdfunding');
 
-        $currency = Crowdfunding\Currency::getInstance(JFactory::getDbo(), $this->cfParams->get('project_currency'));
-
-        $this->amount = new Crowdfunding\Amount($this->cfParams);
-        $this->amount->setCurrency($currency);
+        $this->money        = $this->getMoneyFormatter($this->cfParams);
 
         // Get transactions number.
-        $projectsIds = array();
-        foreach ($this->items as $item) {
-            $projectsIds[] = $item->id;
-        }
+        $projectsIds        = Prism\Utilities\ArrayHelper::getIds($this->items);
 
         $projects           = new Crowdfunding\Projects(JFactory::getDbo());
         $this->transactions = $projects->getTransactionsNumber($projectsIds);

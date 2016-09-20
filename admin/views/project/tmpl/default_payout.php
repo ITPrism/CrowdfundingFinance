@@ -22,31 +22,31 @@ defined('_JEXEC') or die;
     <tr class="success">
         <th><?php echo JText::_('COM_CROWDFUNDINGFINANCE_COMPLETED'); ?></th>
         <td>
-            <?php echo JHtml::_('crowdfundingfinancebackend.transactionStatisticAmount', $this->transactionStatuses, 'completed', $this->amount); ?>
+            <?php echo JHtml::_('crowdfundingfinancebackend.transactionStatisticAmount', $this->transactionStatuses, 'completed', $this->money); ?>
         </td>
     </tr>
     <tr class="success">
         <th><?php echo JText::_('COM_CROWDFUNDINGFINANCE_PENDING'); ?></th>
         <td>
-            <?php echo JHtml::_('crowdfundingfinancebackend.transactionStatisticAmount', $this->transactionStatuses, 'pending', $this->amount); ?>
+            <?php echo JHtml::_('crowdfundingfinancebackend.transactionStatisticAmount', $this->transactionStatuses, 'pending', $this->money); ?>
         </td>
     </tr>
     <tr class="error">
         <th><?php echo JText::_('COM_CROWDFUNDINGFINANCE_CANCELED'); ?></th>
         <td>
-            <?php echo JHtml::_('crowdfundingfinancebackend.transactionStatisticAmount', $this->transactionStatuses, 'canceled', $this->amount); ?>
+            <?php echo JHtml::_('crowdfundingfinancebackend.transactionStatisticAmount', $this->transactionStatuses, 'canceled', $this->money); ?>
         </td>
     </tr>
     <tr class="error">
         <th><?php echo JText::_('COM_CROWDFUNDINGFINANCE_FAILED'); ?></th>
         <td>
-            <?php echo JHtml::_('crowdfundingfinancebackend.transactionStatisticAmount', $this->transactionStatuses, 'failed', $this->amount); ?>
+            <?php echo JHtml::_('crowdfundingfinancebackend.transactionStatisticAmount', $this->transactionStatuses, 'failed', $this->money); ?>
         </td>
     </tr>
     <tr class="error">
         <th><?php echo JText::_('COM_CROWDFUNDINGFINANCE_REFUNDED'); ?></th>
         <td>
-            <?php echo JHtml::_('crowdfundingfinancebackend.transactionStatisticAmount', $this->transactionStatuses, 'refunded', $this->amount); ?>
+            <?php echo JHtml::_('crowdfundingfinancebackend.transactionStatisticAmount', $this->transactionStatuses, 'refunded', $this->money); ?>
         </td>
     </tr>
     </tbody>
@@ -61,13 +61,13 @@ defined('_JEXEC') or die;
     <tr class="success">
         <th><?php echo JText::_('COM_CROWDFUNDINGFINANCE_EARNED_FEES'); ?></th>
         <td>
-            <?php echo JHtml::_('crowdfundingfinancebackend.earnedFees', $this->transactionStatuses, $this->amount, JText::_('COM_CROWDFUNDINGFINANCE_SUM_COMPLETED_PENDING_TRANSACTIONS')); ?>
+            <?php echo JHtml::_('crowdfundingfinancebackend.earnedFees', $this->transactionStatuses, $this->money, JText::_('COM_CROWDFUNDINGFINANCE_SUM_COMPLETED_PENDING_TRANSACTIONS')); ?>
         </td>
     </tr>
     <tr class="error">
         <th><?php echo JText::_('COM_CROWDFUNDINGFINANCE_MISSED_FEES'); ?></th>
         <td>
-            <?php echo JHtml::_('crowdfundingfinancebackend.missedFees', $this->transactionStatuses, $this->amount, JText::_('COM_CROWDFUNDINGFINANCE_SUM_FAILED_TRANSACTIONS')); ?>
+            <?php echo JHtml::_('crowdfundingfinancebackend.missedFees', $this->transactionStatuses, $this->money, JText::_('COM_CROWDFUNDINGFINANCE_SUM_FAILED_TRANSACTIONS')); ?>
         </td>
     </tr>
     </tbody>
@@ -82,13 +82,13 @@ defined('_JEXEC') or die;
     <tr class="success">
         <th><?php echo JText::_('COM_CROWDFUNDINGFINANCE_OWNER_EARNED_AMOUNT'); ?></th>
         <td>
-            <?php echo JHtml::_('crowdfundingfinancebackend.ownerEarnedAmount', $this->transactionStatuses, $this->amount, JText::_('COM_CROWDFUNDINGFINANCE_SUM_OWNER_RECEIVE')); ?>
+            <?php echo JHtml::_('crowdfundingfinancebackend.ownerEarnedAmount', $this->transactionStatuses, $this->money, JText::_('COM_CROWDFUNDINGFINANCE_SUM_OWNER_RECEIVE')); ?>
         </td>
     </tr>
     <tr class="error">
         <th><?php echo JText::_('COM_CROWDFUNDINGFINANCE_OWNER_MISSED_AMOUNT'); ?></th>
         <td>
-            <?php echo JHtml::_('crowdfundingfinancebackend.ownerMissedAmount', $this->transactionStatuses, $this->amount, JText::_('COM_CROWDFUNDINGFINANCE_SUM_OWNER_CANNOT_RECEIVE')); ?>
+            <?php echo JHtml::_('crowdfundingfinancebackend.ownerMissedAmount', $this->transactionStatuses, $this->money, JText::_('COM_CROWDFUNDINGFINANCE_SUM_OWNER_CANNOT_RECEIVE')); ?>
         </td>
     </tr>
     </tbody>

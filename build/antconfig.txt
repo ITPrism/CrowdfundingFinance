@@ -1,6 +1,0 @@
-cfg.name=crowdfundingfinance
-cfg.version=v2.3.1
-cfg.joomlaVersion=J3.6
-cfg.buildDir=packages
-cfg.sourceDir=D:/xampp/htdocs/crowdfunding2
-cfg.pkgDir=D:/cvsProjects/0Extensions/Free/Components/pkg_crowdfundingfinance
