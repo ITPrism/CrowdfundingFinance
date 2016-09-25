@@ -49,7 +49,7 @@ class plgCrowdfundingPayoutOptions extends JPlugin
         $this->log = new Prism\Log\Log();
 
         // Set file adapter.
-        $file = \JPath::clean($this->app->get('log_path') . DIRECTORY_SEPARATOR . 'plg_crowdfunding_payout_options.php');
+        $file = \JPath::clean($this->app->get('log_path') . DIRECTORY_SEPARATOR . 'plg_crowdfunding_payoutoptions.php');
         $this->log->addAdapter(new Prism\Log\Adapter\File($file));
     }
 
