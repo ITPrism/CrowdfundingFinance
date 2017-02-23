@@ -3,7 +3,7 @@
  * @package      Crowdfundingfinance
  * @subpackage   Components
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -40,27 +40,28 @@ class CrowdfundingfinanceViewProject extends JViewLegacy
     protected $documentTitle;
     protected $option;
 
+    protected $fundedData;
+
     public function display($tpl = null)
     {
-        $this->option = JFactory::getApplication()->input->get('option');
+        $app          = JFactory::getApplication();
+        $this->option = $app->input->get('option');
 
-        $app    = JFactory::getApplication();
-        $itemId = $app->input->getUint('id');
+        $itemId       = $app->input->getUint('id');
 
         $model        = $this->getModel();
         $this->params = JComponentHelper::getParams('com_crowdfundingfinance');
 
-        $this->item = $model->getItem($itemId);
+        $this->item   = $model->getItem($itemId);
 
-        $this->stats = new Crowdfunding\Statistics\Project(JFactory::getDbo(), $itemId);
+        $this->stats  = new Crowdfunding\Statistics\Project(JFactory::getDbo(), $itemId);
 
         $this->transactionStatuses = $this->stats->getTransactionsStatusStatistics();
-        $this->payout = $this->stats->getPayoutStatistics();
+        $this->payout              = $this->stats->getPayoutStatistics();
 
         $this->cfParams  = JComponentHelper::getParams('com_crowdfunding');
 
-        $imagesFolder    = $this->cfParams->get('images_directory', 'images/crowdfunding');
-        $this->imagesUrl = JUri::root() . $imagesFolder;
+        $this->imagesUrl = JUri::root() . CrowdfundingHelper::getImagesFolderUri();
 
         $this->money     = $this->getMoneyFormatter($this->cfParams);
 
@@ -84,7 +85,9 @@ class CrowdfundingfinanceViewProject extends JViewLegacy
 
         JToolbarHelper::title($this->documentTitle);
 
-        JToolbarHelper::cancel('project.cancel', 'JTOOLBAR_CLOSE');
+        // Add custom buttons
+        $bar = JToolbar::getInstance('toolbar');
+        $bar->appendButton('Link', 'cancel', JText::_('JTOOLBAR_CLOSE'), JRoute::_('index.php?option=com_crowdfundingfinance&view=projects'));
     }
 
     /**
@@ -101,13 +104,16 @@ class CrowdfundingfinanceViewProject extends JViewLegacy
         JHtml::_('behavior.keepalive');
         JHtml::_('behavior.formvalidation');
 
-        $d3Cdn = (bool)$this->params->get('d3_cdn', true);
-        JHtml::_('Prism.ui.d3', $d3Cdn);
+        JHtml::_('Prism.ui.chartjs');
+
+        JText::script('COM_CROWDFUNDINGFINANCE_DAILY_FUNDS');
 
         $js = '
-            cfProjectId = ' . $this->item->id . ';
-        ';
+        var crowdfundingPlatform = {
+            projectId: ' . $this->item->id .'
+        }';
+
         $this->document->addScriptDeclaration($js);
-        $this->document->addScript('../media/' . $this->option . '/js/admin/' . JString::strtolower($this->getName()) . '.js');
+        $this->document->addScript('../media/' . $this->option . '/js/admin/' . strtolower($this->getName()) . '.js');
     }
 }

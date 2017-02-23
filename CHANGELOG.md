@@ -1,6 +1,9 @@
 Crowdfunding Finance Changelog
 ===============================
 
+###v2.5
+* Fixed issue with fees fields.
+
 ###v2.4
 * Improved amount formatting.
 * It was made compatible with Crowdfunding v2.5.

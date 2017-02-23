@@ -3,23 +3,30 @@
  * @package      Crowdfundingfinance
  * @subpackage   Components
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
+
+use Joomla\Registry\Registry;
+use League\Fractal;
+use Crowdfunding\Data\Serializer;
+use Crowdfunding\Data\Transformer;
 
 // No direct access
 defined('_JEXEC') or die;
 
 /**
- * Crowdfunding Finance project controller class.
+ * Crowdfunding Finance statistics controller class.
  *
- * @package        ITPrism Components
- * @subpackage     Crowdfunding
+ * @package        Crowdfundingfinance
+ * @subpackage     Components
  * @since          1.6
  */
 class CrowdfundingfinanceControllerStatistics extends JControllerLegacy
 {
-    public function getProjectTransactions()
+    use Crowdfunding\Helper\MoneyHelper;
+
+    public function getDailyFunds()
     {
         // Create response object
         $response = new Prism\Response\Json();
@@ -27,7 +34,7 @@ class CrowdfundingfinanceControllerStatistics extends JControllerLegacy
         $app = JFactory::getApplication();
         /** @var $app JApplicationAdministrator */
 
-        $itemId = $app->input->getInt('id');
+        $itemId = $app->input->getUint('id');
 
         // Check for errors.
         if (!$itemId) {
@@ -37,19 +44,28 @@ class CrowdfundingfinanceControllerStatistics extends JControllerLegacy
                 ->failure();
 
             echo $response;
-            JFactory::getApplication()->close();
+            $app->close();
         }
 
         $data = array();
 
         try {
+            $params = \JComponentHelper::getParams('com_crowdfunding');
+            /** @var  $params Registry */
 
-            // Get statistics
+            $money   = $this->getMoneyFormatter($params);
+
             $project = new Crowdfunding\Statistics\Project(JFactory::getDbo(), $itemId);
             $data    = $project->getFullPeriodAmounts();
 
-        } catch (Exception $e) {
+            $manager = new Fractal\Manager();
+            $manager->setSerializer(new Serializer\Chart\DailyFunds());
 
+            // Run all transformers
+            $resource = new Fractal\Resource\Collection($data, new Transformer\Chart\DailyFunds($money));
+            $data     = $manager->createData($resource)->toArray();
+
+        } catch (Exception $e) {
             JLog::add($e->getMessage());
 
             $response
@@ -58,8 +74,7 @@ class CrowdfundingfinanceControllerStatistics extends JControllerLegacy
                 ->failure();
 
             echo $response;
-            JFactory::getApplication()->close();
-
+            $app->close();
         }
 
         $response
@@ -67,19 +82,19 @@ class CrowdfundingfinanceControllerStatistics extends JControllerLegacy
             ->success();
 
         echo $response;
-        JFactory::getApplication()->close();
+        $app->close();
     }
 
 
     public function getProjectFunds()
     {
-        // Create response object
-        $response = new Prism\Response\Json();
-
         $app = JFactory::getApplication();
         /** @var $app JApplicationAdministrator */
 
-        $itemId = $app->input->getInt('id');
+        // Create response object
+        $response = new Prism\Response\Json();
+
+        $itemId = $app->input->getUint('id');
 
         // Check for errors.
         if (!$itemId) {
@@ -89,17 +104,28 @@ class CrowdfundingfinanceControllerStatistics extends JControllerLegacy
                 ->failure();
 
             echo $response;
-            JFactory::getApplication()->close();
+            $app->close();
         }
 
-        try {
+        $data = array();
 
-            // Get statistics
+        try {
+            $params = \JComponentHelper::getParams('com_crowdfunding');
+            /** @var  $params Registry */
+
+            $money   = $this->getMoneyFormatter($params);
+
             $project = new Crowdfunding\Statistics\Project(JFactory::getDbo(), $itemId);
             $data    = $project->getFundedAmount();
 
-        } catch (Exception $e) {
+            $manager = new Fractal\Manager();
+            $manager->setSerializer(new Serializer\Chart\ProjectFunds());
 
+            // Run all transformers
+            $resource = new Fractal\Resource\Item($data, new Transformer\Chart\ProjectFunds($money));
+            $data = $manager->createData($resource)->toArray();
+
+        } catch (Exception $e) {
             JLog::add($e->getMessage());
 
             $response
@@ -108,10 +134,7 @@ class CrowdfundingfinanceControllerStatistics extends JControllerLegacy
                 ->failure();
 
             echo $response;
-            JFactory::getApplication()->close();
-
-            throw new Exception(JText::_('COM_CROWDFUNDINGFINANCE_ERROR_SYSTEM'));
-
+            $app->close();
         }
 
         $response
@@ -119,6 +142,6 @@ class CrowdfundingfinanceControllerStatistics extends JControllerLegacy
             ->success();
 
         echo $response;
-        JFactory::getApplication()->close();
+        $app->close();
     }
 }

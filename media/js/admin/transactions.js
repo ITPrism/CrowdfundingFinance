@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+;jQuery(document).ready(function() {
 
     jQuery(".js-reward-state").on('change', function(event){
         event.preventDefault();

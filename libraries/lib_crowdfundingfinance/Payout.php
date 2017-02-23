@@ -3,7 +3,7 @@
  * @package      Crowdfundingfinance
  * @subpackage   Payouts
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -49,6 +49,8 @@ class Payout extends Database\Table
      *
      * @param int|array $keys Project ID or keys
      * @param array $options
+     *
+     * @throws \RuntimeException
      */
     public function load($keys, array $options = array())
     {
@@ -125,7 +127,7 @@ class Payout extends Database\Table
      */
     public function getPaypalEmail()
     {
-        return $this->paypal_email;
+        return (string)$this->paypal_email;
     }
 
     /**

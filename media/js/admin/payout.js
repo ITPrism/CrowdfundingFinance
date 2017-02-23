@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+;jQuery(document).ready(function() {
 
     // Validation script
     Joomla.submitbutton = function(task){

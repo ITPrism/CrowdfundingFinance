@@ -3,18 +3,13 @@
  * @package      Crowdfundingfinance
  * @subpackage   Components
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 // no direct access
 defined('_JEXEC') or die;
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_crowdfundingfinance'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
-    <input type="hidden" name="task" value=""/>
-    <?php echo JHtml::_('form.token'); ?>
-</form>
-
 <div class="row-fluid">
     <div class="span3">
         <ul class="thumbnails">
@@ -29,12 +24,6 @@ defined('_JEXEC') or die;
                 </div>
             </li>
         </ul>
-
-        <div class="row-fluid">
-            <div class="span12" id="funded-piechart">
-            </div>
-        </div>
-
     </div>
     <div class="span3">
         <?php echo $this->loadTemplate('basic'); ?>
@@ -43,9 +32,11 @@ defined('_JEXEC') or die;
     <div class="span3">
         <?php echo $this->loadTemplate('payout'); ?>
     </div>
+    <div class="span3">
+        <canvas id="js-funded-chart" width="400" height="400" ></canvas>
+    </div>
 </div>
 
-<div class="row-fluid">
-    <div class="span12" id="amount-days-lines">
-    </div>
+<div style="position: relative; height: 50vh" >
+    <canvas id="js-transactions-chart"></canvas>
 </div>

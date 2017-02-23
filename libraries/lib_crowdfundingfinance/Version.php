@@ -3,7 +3,7 @@
  * @package      Crowdfundingfinance
  * @subpackage   Version
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -38,7 +38,7 @@ class Version
      *
      * @var integer
      */
-    public $devLevel = '4';
+    public $devLevel = '5';
 
     /**
      * Release Type
@@ -59,7 +59,7 @@ class Version
      *
      * @var string
      */
-    public $releaseDate = '18 September, 2016';
+    public $releaseDate = '23 February, 2017';
 
     /**
      * License
@@ -73,7 +73,7 @@ class Version
      *
      * @var string
      */
-    public $copyright = '&copy; 2016 ITPrism. All rights reserved.';
+    public $copyright = '&copy; 2017 ITPrism. All rights reserved.';
 
     /**
      * URL
@@ -101,7 +101,7 @@ class Version
      *
      * @var string
      */
-    public $requiredPrismVersion = '1.15';
+    public $requiredPrismVersion = '1.19';
 
     /**
      *  Build long format of the version text

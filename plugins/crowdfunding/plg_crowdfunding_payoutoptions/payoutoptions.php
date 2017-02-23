@@ -3,7 +3,7 @@
  * @package         CrowdfundingPayoutOptions
  * @subpackage      Plugins
  * @author          Todor Iliev
- * @copyright       Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright       Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license         http://www.gnu.org/licenses/gpl-3.0.en.html GNU/GPL
  */
 

@@ -1,6 +1,6 @@
 Crowdfunding Finance for Joomla!
 ==========================
-( Version 2.4 )
+( Version 2.5 )
 - - -
 
 Crowdfunding Finance is a Joomla! extension that provides functionality for managing Crowdfunding transactions and payouts.

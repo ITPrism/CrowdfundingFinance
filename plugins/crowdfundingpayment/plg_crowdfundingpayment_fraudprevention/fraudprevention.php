@@ -3,7 +3,7 @@
  * @package      CrowdfundingPayment
  * @subpackage   Plugins
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2016 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2017 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
@@ -33,14 +33,13 @@ class plgCrowdfundingPaymentFraudPrevention extends JPlugin
      *
      * @param string    $context This string gives information about that where it has been executed the trigger.
      * @param stdClass    $item    A project data.
-     * @param Prism\Money\Money    $money  An Money object.
      * @param Joomla\Registry\Registry $params  The parameters of the component
      *
      * @throws \InvalidArgumentException
      *
      * @return null|string
      */
-    public function onBeforePaymentAuthorize($context, &$item, &$money, &$params)
+    public function onBeforePaymentAuthorize($context, $item, $params)
     {
         if (strcmp('com_crowdfunding.before.payment.authorize', $context) !== 0) {
             return null;
@@ -58,6 +57,10 @@ class plgCrowdfundingPaymentFraudPrevention extends JPlugin
         if (strcmp('html', $docType) !== 0) {
             return null;
         }
+
+        $container       = Prism\Container::getContainer();
+        $containerHelper = new Crowdfunding\Container\Helper();
+        $money           = $containerHelper->fetchMoneyFormatter($container, $params);
 
         // Get user ID.
         $userId  = JFactory::getUser()->get('id');
