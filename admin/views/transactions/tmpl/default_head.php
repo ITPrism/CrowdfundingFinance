@@ -23,9 +23,6 @@ defined('_JEXEC') or die;
     <th width="10%" class="nowrap hidden-phone">
         <?php echo JHtml::_('grid.sort', 'COM_CROWDFUNDINGFINANCE_BENEFICIARY', 'b.name', $this->listDirn, $this->listOrder); ?>
     </th>
-    <th width="10%" class="nowrap hidden-phone">
-        <?php echo JHtml::_('grid.sort', 'COM_CROWDFUNDINGFINANCE_PROJECT', 'c.title', $this->listDirn, $this->listOrder); ?>
-    </th>
     <th width="10%" class="nowrap">
         <?php echo JHtml::_('grid.sort', 'COM_CROWDFUNDINGFINANCE_AMOUNT', 'a.txn_amount', $this->listDirn, $this->listOrder); ?>
     </th>

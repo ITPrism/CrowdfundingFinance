@@ -22,13 +22,13 @@ defined('_JEXEC') or die;
     <tr>
         <th><?php echo JText::_('COM_CROWDFUNDINGFINANCE_GOAL'); ?></th>
         <td>
-            <?php echo $this->money->setAmount($this->item->goal)->formatCurrency(); ?>
+            <?php echo $this->moneyFormatter->formatCurrency(new Prism\Money\Money($this->item->goal, $this->currency)); ?>
         </td>
     </tr>
     <tr>
         <th><?php echo JText::_('COM_CROWDFUNDINGFINANCE_FUNDED'); ?></th>
         <td>
-            <?php echo $this->money->setAmount($this->item->funded)->formatCurrency(); ?>
+            <?php echo $this->moneyFormatter->formatCurrency(new Prism\Money\Money($this->item->funded, $this->currency)); ?>
         </td>
     </tr>
     <tr>

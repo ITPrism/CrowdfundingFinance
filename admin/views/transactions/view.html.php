@@ -7,13 +7,14 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
+use \Crowdfunding\Container\Helper\Money as MoneyHelper;
+use \Crowdfunding\Currency\Gateway\JoomlaGateway as CurrencyGateway;
+
 // no direct access
 defined('_JEXEC') or die;
 
 class CrowdfundingfinanceViewTransactions extends JViewLegacy
 {
-    use Crowdfunding\Helper\MoneyHelper;
-
     /**
      * @var JDocumentHtml
      */
@@ -34,7 +35,8 @@ class CrowdfundingfinanceViewTransactions extends JViewLegacy
 
     protected $projectTitle = '';
     protected $currencies;
-    protected $money;
+    protected $currency;
+    protected $moneyFormatter;
 
     protected $option;
     protected $listOrder;
@@ -54,8 +56,15 @@ class CrowdfundingfinanceViewTransactions extends JViewLegacy
      *
      * @var array
      */
-    protected $specificPlugins = array('paypalexpress', 'paypaladaptive', 'stripeconnect');
-    
+    protected $specificPlugins = array();
+
+    public function __construct(array $config = array())
+    {
+        parent::__construct($config);
+
+        $this->specificPlugins = array('paypalexpress', 'paypaladaptive', 'stripeconnect');
+    }
+
     public function display($tpl = null)
     {
         $this->option     = JFactory::getApplication()->input->get('option');
@@ -64,6 +73,8 @@ class CrowdfundingfinanceViewTransactions extends JViewLegacy
         $this->items      = $this->get('Items');
         $this->pagination = $this->get('Pagination');
 
+        $currencyGateway  = new CurrencyGateway(JFactory::getDbo());
+
         // Get parameters of com_crowdfunding.
         $this->cfParams = JComponentHelper::getParams('com_crowdfunding');
 
@@ -71,19 +82,38 @@ class CrowdfundingfinanceViewTransactions extends JViewLegacy
         $currencyCodes= array();
         foreach ($this->items as $item) {
             $currencyCodes[] = $item->txn_currency;
-            $currencyCodes   = array_unique($currencyCodes);
         }
+        $currencyCodes = array_filter(array_unique($currencyCodes));
 
         if (count($currencyCodes) > 0) {
-            $this->currencies = new Crowdfunding\Currencies(JFactory::getDbo());
-            $this->currencies->load(array('codes' => $currencyCodes));
+            $mapper             = new \Crowdfunding\Currency\Mapper($currencyGateway);
+            $repository         = new \Crowdfunding\Currency\Repository($mapper);
 
-            $this->money      = $this->getMoneyFormatter($this->cfParams);
+            $databaseRequest    = new \Prism\Database\Request\Request;
+            $databaseRequest->addSpecificCondition(
+                'codes',
+                new \Prism\Database\Request\Condition([
+                    'column'   => 'code',
+                    'value'    => $currencyCodes,
+                    'operator' => 'IN',
+                    'table'    => 'a'
+                ])
+            );
+
+            $this->currencies   = $repository->fetchCollection($databaseRequest);
         }
 
+        $locale               = JFactory::getLanguage()->getTag();
+
+        $container            = Prism\Container::getContainer();
+
+        $containerHelper      = new MoneyHelper($container);
+        $this->currency       = $containerHelper->getCurrency($this->cfParams->get('project_currency'), $currencyGateway);
+        $this->moneyFormatter = $containerHelper->getFormatter($locale);
+
         // Get project title.
-        $search = $this->state->get('filter.search');
-        if (JString::strlen($search) > 0 and (strpos($search, 'pid') === 0)) {
+        $search = (string)$this->state->get('filter.search');
+        if ($search !== '' and strpos($search, 'pid') === 0) {
             $projectId          = (int)substr($search, 4);
             $this->projectTitle = CrowdfundingHelper::getProjectTitle($projectId);
         }
@@ -108,6 +138,8 @@ class CrowdfundingfinanceViewTransactions extends JViewLegacy
 
     /**
      * Prepare sortable fields, sort values and filters.
+     *
+     * @throws \Exception
      */
     protected function prepareSorting()
     {
@@ -177,7 +209,7 @@ class CrowdfundingfinanceViewTransactions extends JViewLegacy
     protected function addToolbar()
     {
         // Set toolbar items for the page
-        if (JString::strlen($this->projectTitle) > 0) {
+        if ($this->projectTitle) {
             JToolbarHelper::title(JText::sprintf('COM_CROWDFUNDINGFINANCE_TRANSACTIONS_MANAGER_PROJECT_TITLE', $this->projectTitle));
         } else {
             JToolbarHelper::title(JText::_('COM_CROWDFUNDINGFINANCE_TRANSACTIONS_MANAGER'));
@@ -190,7 +222,7 @@ class CrowdfundingfinanceViewTransactions extends JViewLegacy
             JToolbarHelper::divider();
 
             // Add custom buttons
-            $bar = JToolbar::getInstance('toolbar');
+            $bar = JToolbar::getInstance();
             $bar->appendButton('Confirm', JText::_('COM_CROWDFUNDINGFINANCE_QUESTION_CAPTURE'), 'checkin', JText::_('COM_CROWDFUNDINGFINANCE_CAPTURE'), 'payments.doCapture', true);
             $bar->appendButton('Confirm', JText::_('COM_CROWDFUNDINGFINANCE_QUESTION_VOID'), 'cancel-circle', JText::_('COM_CROWDFUNDINGFINANCE_VOID'), 'payments.doVoid', true);
         }
@@ -209,7 +241,7 @@ class CrowdfundingfinanceViewTransactions extends JViewLegacy
      */
     protected function setDocument()
     {
-        if (JString::strlen($this->projectTitle) > 0) {
+        if ($this->projectTitle) {
             $this->document->setTitle(JText::sprintf('COM_CROWDFUNDINGFINANCE_TRANSACTIONS_MANAGER_PROJECT_TITLE', $this->projectTitle));
         } else {
             $this->document->setTitle(JText::_('COM_CROWDFUNDINGFINANCE_TRANSACTIONS_MANAGER'));
@@ -225,6 +257,6 @@ class CrowdfundingfinanceViewTransactions extends JViewLegacy
         JHtml::_('Prism.ui.pnotify');
         JHtml::_('Prism.ui.joomlaHelper');
 
-        $this->document->addScript('../media/' . $this->option . '/js/admin/' . JString::strtolower($this->getName()) . '.js');
+        $this->document->addScript('../media/' . $this->option . '/js/admin/' . strtolower($this->getName()) . '.js');
     }
 }

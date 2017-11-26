@@ -42,8 +42,8 @@ defined('_JEXEC') or die;
             </div>
         </td>
         <td class="hidden-phone">
-            <div class="cf-goal"><?php echo JText::sprintf('COM_CROWDFUNDINGFINANCE_GOAL_S', $this->money->setAmount($item->goal)->formatCurrency()); ?></div>
-            <div class="cf-funded"><?php echo JText::sprintf('COM_CROWDFUNDINGFINANCE_FUNDED_S', $this->money->setAmount($item->funded)->formatCurrency()); ?></div>
+            <div class="cf-goal"><?php echo JText::sprintf('COM_CROWDFUNDINGFINANCE_GOAL_S', $this->moneyFormatter->formatCurrency(new Prism\Money\Money($item->goal, $this->currency))); ?></div>
+            <div class="cf-funded"><?php echo JText::sprintf('COM_CROWDFUNDINGFINANCE_FUNDED_S', $this->moneyFormatter->formatCurrency(new Prism\Money\Money($item->funded, $this->currency))); ?></div>
             <div class="cf-percent"><?php echo JText::sprintf('COM_CROWDFUNDINGFINANCE_PERCENT_S', JHtml::_('crowdfunding.percent', $item->funded_percents)); ?></div>
         </td>
         <td class="hidden-phone">

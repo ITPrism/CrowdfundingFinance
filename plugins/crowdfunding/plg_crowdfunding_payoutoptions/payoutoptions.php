@@ -10,7 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
-jimport('Prism.libs.GuzzleHttp.init');
+jimport('Prism.vendor.GuzzleHttp.init');
 jimport('Crowdfunding.init');
 jimport('Crowdfundingfinance.init');
 

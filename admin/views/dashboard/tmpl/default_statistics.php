@@ -26,10 +26,8 @@ defined('_JEXEC') or die;
                         <tr>
                             <th>#</th>
                             <th><?php echo JText::_('COM_CROWDFUNDINGFINANCE_PROJECT'); ?></th>
-                            <th class="center nowrap"
-                                style="max-width: 50px;"><?php echo JText::_('COM_CROWDFUNDINGFINANCE_AMOUNT'); ?></th>
-                            <th class="center nowrap hidden-phone"
-                                style="max-width: 100px;"><?php echo JText::_('COM_CROWDFUNDINGFINANCE_DATE'); ?></th>
+                            <th class="center nowrap" style="max-width: 50px;"><?php echo JText::_('COM_CROWDFUNDINGFINANCE_AMOUNT'); ?></th>
+                            <th class="center nowrap hidden-phone" style="max-width: 100px;"><?php echo JText::_('COM_CROWDFUNDINGFINANCE_DATE'); ?></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -38,7 +36,7 @@ defined('_JEXEC') or die;
                                 <td><?php echo $i + 1; ?></td>
                                 <td>
                                     <a href="<?php echo JRoute::_('index.php?option=com_crowdfundingfinance&view=project&id=' . (int)$this->latest[$i]['project_id']); ?>">
-                                        <?php echo JHtmlString::truncate(strip_tags($this->latest[$i]["title"]), 53); ?>
+                                        <?php echo JHtmlString::truncate(strip_tags($this->latest[$i]['title']), 53); ?>
                                     </a>
                                     <a class="help-box"
                                        href="<?php echo JRoute::_('index.php?option=com_crowdfundingfinance&view=transactions&filter_search=id:' . (int)$this->latest[$i]['id']); ?>">
@@ -46,7 +44,7 @@ defined('_JEXEC') or die;
                                     </a>
                                 </td>
                                 <td class="center">
-                                    <?php echo $this->money->setAmount($this->latest[$i]['txn_amount'])->formatCurrency(); ?>
+                                    <?php echo $this->moneyFormatter->formatCurrency(new Prism\Money\Money($this->latest[$i]['txn_amount'], $this->currency)); ?>
                                 </td>
                                 <td class="center hidden-phone">
                                     <?php echo JHtml::_('date', $this->latest[$i]['txn_date'], $this->cfParams->get('date_format_views', JText::_('DATE_FORMAT_LC3'))); ?>
@@ -78,7 +76,7 @@ defined('_JEXEC') or die;
                         </tr>
                         <tr>
                             <th><?php echo JText::_('COM_CROWDFUNDINGFINANCE_TOTAL_AMOUNT'); ?></th>
-                            <td><?php echo $this->money->setAmount($this->totalAmount)->formatCurrency(); ?></td>
+                            <td><?php echo $this->moneyFormatter->formatCurrency(new Prism\Money\Money($this->totalAmount, $this->currency)); ?></td>
                         </tr>
                         </tbody>
                     </table>

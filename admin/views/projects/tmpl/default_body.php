@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 ?>
 <?php foreach ($this->items as $i => $item) {
-    $numberOfTransactions = (isset($this->transactions[$item->id])) ? $this->transactions[$item->id]['number'] : 0;
+    $numberOfTransactions = isset($this->transactions[$item->id]) ? $this->transactions[$item->id]['number'] : 0;
     ?>
     <tr class="row<?php echo $i % 2; ?>">
         <td class="center hidden-phone">
@@ -35,8 +35,8 @@ defined('_JEXEC') or die;
                 </a>
             </div>
         </td>
-        <td class="hidden-phone"><?php echo $this->money->setAmount($item->goal)->formatCurrency(); ?></td>
-        <td class="hidden-phone"><?php echo $this->money->setAmount($item->funded)->formatCurrency(); ?></td>
+        <td class="hidden-phone"><?php echo $this->moneyFormatter->formatCurrency(new Prism\Money\Money($item->goal, $this->currency)); ?></td>
+        <td class="hidden-phone"><?php echo $this->moneyFormatter->formatCurrency(new Prism\Money\Money($item->funded, $this->currency)); ?></td>
         <td class="hidden-phone"><?php echo JHtml::_('crowdfunding.percent', $item->funded_percents); ?></td>
         <td class="hidden-phone"><?php echo JHtml::_('crowdfunding.date', $item->funding_start, $this->cfParams->get('date_format_views', JText::_('DATE_FORMAT_LC3'))); ?></td>
         <td class="hidden-phone"><?php echo JHtml::_('crowdfunding.duration', $item->funding_end, $item->funding_days, $this->cfParams->get('date_format_views', JText::_('DATE_FORMAT_LC3'))); ?></td>

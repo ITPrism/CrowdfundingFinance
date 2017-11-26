@@ -1,6 +1,9 @@
 Crowdfunding Finance Changelog
 ===============================
 
+###v2.6
+* It was made compatible with Prism Library v1.21
+
 ###v2.5
 * Fixed issue with fees fields.
 

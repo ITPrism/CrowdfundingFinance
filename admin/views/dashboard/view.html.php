@@ -7,13 +7,13 @@
  * @license      GNU General Public License version 3 or later; see LICENSE.txt
  */
 
+use Crowdfunding\Container\MoneyHelper;
+
 // no direct access
 defined('_JEXEC') or die;
 
 class CrowdfundingfinanceViewDashboard extends JViewLegacy
 {
-    use Crowdfunding\Helper\MoneyHelper;
-
     /**
      * @var JDocumentHtml
      */
@@ -30,7 +30,8 @@ class CrowdfundingfinanceViewDashboard extends JViewLegacy
     protected $totalProjects;
     protected $totalTransactions;
     protected $totalAmount;
-    protected $money;
+    protected $currency;
+    protected $moneyFormatter;
     protected $version;
     protected $prismVersion;
     protected $prismVersionLowerMessage;
@@ -53,6 +54,8 @@ class CrowdfundingfinanceViewDashboard extends JViewLegacy
             }
         }
 
+        $container      = Prism\Container::getContainer();
+
         $this->cfParams = JComponentHelper::getParams('com_crowdfunding');
         /** @var  $cfParams Joomla\Registry\Registry */
 
@@ -65,7 +68,8 @@ class CrowdfundingfinanceViewDashboard extends JViewLegacy
         $this->totalTransactions = $basic->getTotalTransactions();
         $this->totalAmount       = $basic->getTotalAmount();
 
-        $this->money             = $this->getMoneyFormatter($this->cfParams);
+        $this->currency          = MoneyHelper::getCurrency($container, $this->cfParams);
+        $this->moneyFormatter    = MoneyHelper::getMoneyFormatter($container, $this->cfParams);
 
         // Add submenu
         CrowdfundingfinanceHelper::addSubmenu($this->getName());

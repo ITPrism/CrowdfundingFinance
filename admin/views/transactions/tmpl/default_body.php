@@ -25,22 +25,23 @@ defined('_JEXEC') or die;
         <td class="center hidden-phone">
             <?php echo JHtml::_('grid.id', $i, $item->id); ?>
         </td>
-        <td>
+        <td class="has-context">
             <a href="<?php echo JRoute::_('index.php?option=com_crowdfunding&view=transaction&layout=edit&id=' . $item->id); ?>"><?php echo $item->txn_id; ?></a>
             <?php if (!empty($item->parent_txn_id)) { ?>
-                <div class="small">
-                    <?php echo $this->escape($item->parent_txn_id); ?>
-                </div>
+            <div class="small">
+                <?php echo $this->escape($item->parent_txn_id); ?>
+            </div>
             <?php } ?>
+            <div class="small">
+                <?php echo JText::_('COM_CROWDFUNDINGFINANCE_PROJECT'); ?>:
+                <a href="<?php echo JRoute::_('index.php?option=com_crowdfundingfinance&view=transactions&filter_search=pid:' . $item->project_id); ?>">
+                    <?php echo JHtmlString::truncate(strip_tags($item->project), 53); ?>
+                </a>
+            </div>
         </td>
         <td class="hidden-phone"><?php echo JHtml::_('crowdfunding.name', $item->sender); ?></td>
         <td class="hidden-phone"><?php echo $this->escape($item->beneficiary); ?></td>
-        <td class="hidden-phone">
-            <a href="<?php echo JRoute::_('index.php?option=com_crowdfundingfinance&view=transactions&filter_search=pid:' . $item->project_id); ?>">
-                <?php echo JHtmlString::truncate(strip_tags($item->project), 53); ?>
-            </a>
-        </td>
-        <td><?php echo JHtml::_('crowdfundingbackend.transactionAmount', $item, $this->money, $this->currencies); ?></td>
+        <td><?php echo JHtml::_('crowdfundingbackend.transactionAmount', $item, $this->moneyFormatter, $this->currencies); ?></td>
         <td class="hidden-phone"><?php echo $item->txn_date; ?></td>
         <td class="hidden-phone">
             <?php echo $item->service_provider; ?>

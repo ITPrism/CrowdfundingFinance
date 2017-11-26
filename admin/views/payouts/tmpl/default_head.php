@@ -18,13 +18,13 @@ defined('_JEXEC') or die;
         <?php echo JHtml::_('grid.sort', 'JSTATUS', 'a.published', $this->listDirn, $this->listOrder); ?>
     </th>
     <th class="title">
-        <?php echo JHtml::_('grid.sort', 'COM_CROWDFUNDINGFINANCE_TITLE', 'a.title', $this->listDirn, $this->listOrder); ?>
+        <?php echo JHtml::_('grid.sort', 'COM_CROWDFUNDINGFINANCE_PROJECT', 'a.title', $this->listDirn, $this->listOrder); ?>
     </th>
 
     <th width="10%" class="nowrap hidden-phone">
         <?php echo JText::_("COM_CROWDFUNDINGFINANCE_GOAL"); ?> / <?php echo JText::_("COM_CROWDFUNDINGFINANCE_FUNDED"); ?>
     </th>
-    <th width="15%" class="nowrap hidden-phone">
+    <th width="20%" class="nowrap hidden-phone">
         <?php echo JText::_("COM_CROWDFUNDINGFINANCE_DATE"); ?>
     </th>
     <th width="15%" class="nowrap hidden-phone">

@@ -13,6 +13,8 @@ defined('_JEXEC') or die;
 jimport('Crowdfunding.init');
 jimport('Crowdfundingfinance.init');
 
+use Crowdfunding\Container\MoneyHelper;
+
 /**
  * CrowdfundingPayment - Fraud Prevention validates some states during payment process.
  *
@@ -58,9 +60,9 @@ class plgCrowdfundingPaymentFraudPrevention extends JPlugin
             return null;
         }
 
-        $container       = Prism\Container::getContainer();
-        $containerHelper = new Crowdfunding\Container\Helper();
-        $money           = $containerHelper->fetchMoneyFormatter($container, $params);
+        $container      = Prism\Container::getContainer();
+        $moneyParser    = MoneyHelper::getMoneyParser($container, $params);
+        $currency       = MoneyHelper::getCurrency($container, $params);
 
         // Get user ID.
         $userId  = JFactory::getUser()->get('id');
@@ -82,13 +84,13 @@ class plgCrowdfundingPaymentFraudPrevention extends JPlugin
         /** @var  $componentParams Joomla\Registry\Registry */
 
         // Verify maximum allowed amount for contribution.
-        $allowedContributedAmount = $money->setAmount($componentParams->get('protection_max_contributed_amount'))->parse();
+        $allowedContributedAmount = $moneyParser->parse($componentParams->get('protection_max_contributed_amount'));
 
         // Validate maximum allowed amount.
         if ($allowedContributedAmount and ($allowedContributedAmount < (float)$item->amount)) {
             $html[] = '<p class="bg-warning p-5">';
             $html[] = '<span class="fa fa-exclamation-triangle"></span>';
-            $html[] = JText::sprintf('PLG_CROWDFUNDINGPAYMENT_FRAUD_PREVENTION_ERROR_CONTRIBUTION_AMOUNT_S', $money->setAmount($allowedContributedAmount)->formatCurrency());
+            $html[] = JText::sprintf('PLG_CROWDFUNDINGPAYMENT_FRAUD_PREVENTION_ERROR_CONTRIBUTION_AMOUNT_S', $moneyParser->formatCurrency(new Prism\Money\Money($allowedContributedAmount, $currency)));
             $html[] = '</p>';
         }
 
